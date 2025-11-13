@@ -33,8 +33,8 @@ Plus **two classical baselines** for comparison.
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/quantum-hydra-mamba.git
-cd quantum-hydra-mamba
+git clone https://github.com/JHPark9090/Quantum-Hydra-Mamba.git
+cd Quantum-Hydra-Mamba
 
 # Install dependencies
 pip install -r requirements.txt
@@ -460,7 +460,7 @@ If you use this code in your research, please cite:
   author = {Park, Junghoon},
   title = {Quantum Hydra \& Quantum Mamba: Quantum State-Space Models for Time-Series},
   year = {2024},
-  url = {https://github.com/yourusername/quantum-hydra-mamba}
+  url = {https://github.com/JHPark9090/Quantum-Hydra-Mamba}
 }
 ```
 
@@ -507,8 +507,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## 📧 Contact
 
 For questions or issues:
-- **GitHub Issues**: [Open an issue](https://github.com/yourusername/quantum-hydra-mamba/issues)
-- **Email**: your.email@example.com
+- **GitHub Issues**: [Open an issue](https://github.com/JHPark9090/Quantum-Hydra-Mamba/issues)
 
 ---
 
