@@ -110,11 +110,19 @@ quantum-hydra-mamba/
 │   └── run_all_forrelation_experiments.sh
 │
 ├── docs/                            # Documentation
+│   ├── README.md                    # Documentation index
+│   ├── EXPERIMENT_GUIDE.md          # Complete experiment guide
+│   ├── QUANTUM_HYDRA_GUIDE.md       # Quantum Hydra detailed guide
+│   ├── QUANTUM_MAMBA_GUIDE.md       # Quantum Mamba detailed guide
+│   ├── TIMING_AND_METRICS.md        # Timing and metrics tracking
+│   ├── FORRELATION_README.md        # Forrelation experiment overview
 │   ├── Forrelation_Experiment_Rationale.md
 │   ├── Forrelation_Dataset_Usage_Guide.md
-│   ├── Quantum_Advantage_Test_Plan.md
-│   └── FORRELATION_README.md
+│   └── Quantum_Advantage_Test_Plan.md
 │
+├── QUICK_START.md                   # 30-second command guide
+├── GITHUB_REPO_SUMMARY.md           # Repository summary
+├── GITHUB_UPLOAD_INSTRUCTIONS.md    # GitHub upload guide
 ├── requirements.txt                 # Python dependencies
 ├── .gitignore                       # Git ignore file
 └── README.md                        # This file
@@ -456,10 +464,10 @@ All scripts support CPU execution (remove `--device cuda` flag), but will be **m
 If you use this code in your research, please cite:
 
 ```bibtex
-@software{quantum_hydra_mamba_2024,
+@software{quantum_hydra_mamba_2025,
   author = {Park, Junghoon},
   title = {Quantum Hydra \& Quantum Mamba: Quantum State-Space Models for Time-Series},
-  year = {2024},
+  year = {2025},
   url = {https://github.com/JHPark9090/Quantum-Hydra-Mamba}
 }
 ```
@@ -511,7 +519,7 @@ For questions or issues:
 
 ---
 
-**Last Updated**: November 2024
+**Last Updated**: November 2025
 **Status**: Research code (experimental)
 **Python Version**: 3.8+
 **Tested On**: Ubuntu 20.04, CUDA 11.8

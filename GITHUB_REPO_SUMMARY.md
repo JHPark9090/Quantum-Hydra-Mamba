@@ -298,6 +298,6 @@ All scripts support CPU execution (remove `--device cuda` flag), but will be **m
 
 ---
 
-**Last Updated:** November 2024
+**Last Updated:** November 2025
 **Status:** Production-ready
 **Purpose:** Colleague can run experiments on own GPU hardware

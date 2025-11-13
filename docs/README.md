@@ -192,5 +192,5 @@ The following guides explain the Forrelation experiments for testing quantum adv
 
 ---
 
-**Last Updated:** November 2024
+**Last Updated:** November 2025
 **Maintained by:** Junghoon Park

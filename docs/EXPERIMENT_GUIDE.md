@@ -2,7 +2,7 @@
 
 > Comprehensive guide for running experiments comparing Quantum Hydra, Quantum Mamba, and their classical baselines
 
-**Last Updated**: November 2024
+**Last Updated**: November 2025
 
 ---
 
@@ -547,5 +547,5 @@ python experiments/aggregate_forrelation_results.py
 ---
 
 **Author:** Junghoon Park
-**Last Updated:** November 2024
+**Last Updated:** November 2025
 **License:** MIT

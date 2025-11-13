@@ -406,4 +406,4 @@ return avg_loss, accuracy, avg_batch_time  # Add batch_time to return
 
 ---
 
-**Last Updated:** November 2024
+**Last Updated:** November 2025
