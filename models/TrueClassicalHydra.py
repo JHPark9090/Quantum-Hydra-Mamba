@@ -367,13 +367,21 @@ class TrueClassicalHydra(nn.Module):
         Forward pass.
 
         Args:
-            x: (batch, n_channels, n_timesteps)
+            x: (batch, n_channels, n_timesteps) for 3D inputs (e.g., EEG)
+               OR (batch, features) for 2D inputs (e.g., DNA, MNIST)
 
         Returns:
             output: (batch, output_dim)
         """
-        # Transpose: (B, C, T) -> (B, T, C)
-        x = x.transpose(1, 2)
+        # Handle both 2D and 3D inputs
+        if x.dim() == 2:
+            # 2D input: (B, features) -> (B, features, 1) -> (B, 1, features)
+            x = x.unsqueeze(-1).transpose(1, 2)
+        elif x.dim() == 3:
+            # 3D input: (B, C, T) -> (B, T, C)
+            x = x.transpose(1, 2)
+        else:
+            raise ValueError(f"Expected 2D or 3D input, got {x.dim()}D tensor")
 
         # Embed: (B, T, C) -> (B, T, d_model)
         x = self.embedding(x)

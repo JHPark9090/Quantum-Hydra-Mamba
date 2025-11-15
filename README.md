@@ -290,6 +290,11 @@ model3 = TrueClassicalHydra(
 output3 = model3(eeg_data)  # (16, 2)
 ```
 
+**Note on Input Shapes:**
+- **3D inputs** (EEG): `(batch, channels, timesteps)` - e.g., (16, 64, 160)
+- **2D inputs** (DNA, MNIST): `(batch, features)` - e.g., (16, 228)
+- All models automatically handle both formats
+
 ### Training Loop
 
 ```python
@@ -509,6 +514,27 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - **PyTorch** for deep learning framework
 - **PhysioNet** for EEG datasets
 - **UCI ML Repository** for DNA datasets
+
+---
+
+## ⚠️ Troubleshooting
+
+### Common Issues
+
+**NaN Loss During Training:**
+- Gradient clipping is already implemented in `run_single_model_eeg.py`
+- If you encounter NaN in custom training loops, add:
+  ```python
+  torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
+  ```
+
+**CUDA Out of Memory:**
+- Reduce batch size: `--batch-size 16` (default is 32)
+- Use smaller model: `--n-qubits 4` instead of 6
+
+**Slow Training on CPU:**
+- Expected: CPU is 10-20× slower than GPU
+- Solution: Use `--device cuda` if GPU available
 
 ---
 
