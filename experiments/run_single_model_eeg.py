@@ -25,6 +25,8 @@ from QuantumHydra import QuantumHydraTS
 from QuantumHydraHybrid import QuantumHydraHybridTS
 from QuantumMamba import QuantumMambaTS
 from QuantumMambaHybrid import QuantumMambaHybridTS
+from QuantumMambaLite import QuantumMambaTS_Lite
+from QuantumMambaHybridLite import QuantumMambaHybridTS_Lite
 from TrueClassicalHydra import TrueClassicalHydra
 from TrueClassicalMamba import TrueClassicalMamba
 
@@ -118,7 +120,8 @@ def create_model(model_name, n_qubits, qlcu_layers, n_channels, n_timesteps,
 
     Args:
         model_name: One of ['quantum_hydra', 'quantum_hydra_hybrid', 'quantum_mamba',
-                           'quantum_mamba_hybrid', 'classical_hydra', 'classical_mamba']
+                           'quantum_mamba_hybrid', 'quantum_mamba_lite', 'quantum_mamba_hybrid_lite',
+                           'classical_hydra', 'classical_mamba']
     """
     if model_name == 'quantum_hydra':
         model = QuantumHydraTS(
@@ -160,6 +163,29 @@ def create_model(model_name, n_qubits, qlcu_layers, n_channels, n_timesteps,
             n_qubits=n_qubits,
             n_timesteps=n_timesteps,
             qlcu_layers=qlcu_layers,
+            feature_dim=n_channels,
+            output_dim=output_dim,
+            dropout=dropout,
+            device=device
+        )
+
+    elif model_name == 'quantum_mamba_lite':
+        model = QuantumMambaTS_Lite(
+            n_qubits=n_qubits,
+            n_timesteps=n_timesteps,
+            qlcu_layers=qlcu_layers,
+            feature_dim=n_channels,
+            output_dim=output_dim,
+            dropout=dropout,
+            device=device
+        )
+
+    elif model_name == 'quantum_mamba_hybrid_lite':
+        model = QuantumMambaHybridTS_Lite(
+            n_qubits=n_qubits,
+            n_timesteps=n_timesteps,
+            qlcu_layers=qlcu_layers,
+            gate_layers=2,  # Default value
             feature_dim=n_channels,
             output_dim=output_dim,
             dropout=dropout,
@@ -439,6 +465,7 @@ if __name__ == "__main__":
     parser.add_argument("--model-name", type=str, required=True,
                        choices=['quantum_hydra', 'quantum_hydra_hybrid',
                                'quantum_mamba', 'quantum_mamba_hybrid',
+                               'quantum_mamba_lite', 'quantum_mamba_hybrid_lite',
                                'classical_hydra', 'classical_mamba'],
                        help="Model to train")
 

@@ -2,6 +2,21 @@
 
 This directory contains comprehensive documentation for the Quantum Hydra and Quantum Mamba models.
 
+---
+
+## 🆕 **Latest Updates (November 17, 2025)**
+
+**Important:** This documentation covers the **6 core models**. For information about:
+- **2 new Lite model variants** (QuantumMambaLite, QuantumMambaHybridLite)
+- **Device handling improvements** (proper CPU/CUDA support)
+- **GPU quantum circuit acceleration** (optional pennylane-lightning-gpu)
+
+**Please see:**
+- [`../UPDATE_NOTES.md`](../UPDATE_NOTES.md) - Complete changelog of November 2025 updates
+- [`../README.md`](../README.md) - Main documentation with all 8 models
+
+---
+
 ## 📚 Main Guides
 
 ### 1. [EXPERIMENT_GUIDE.md](EXPERIMENT_GUIDE.md) ⭐ **START HERE**
