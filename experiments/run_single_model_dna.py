@@ -170,7 +170,8 @@ def create_model(model_name, n_qubits, qlcu_layers, feature_dim, d_model, d_stat
             d_state=d_state,
             n_layers=2,
             output_dim=output_dim,
-            dropout=dropout
+            dropout=dropout,
+            device=device
         )
 
     elif model_name == 'classical_mamba':
@@ -182,7 +183,8 @@ def create_model(model_name, n_qubits, qlcu_layers, feature_dim, d_model, d_stat
             d_state=d_state,
             n_layers=2,
             output_dim=output_dim,
-            dropout=dropout
+            dropout=dropout,
+            device=device
         )
 
     else:
