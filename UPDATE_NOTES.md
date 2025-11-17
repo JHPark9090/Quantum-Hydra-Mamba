@@ -6,12 +6,13 @@ This document summarizes the major improvements and additions made to the Quantu
 
 ## 🎯 Overview
 
-Four major improvements were implemented:
+Five major improvements were implemented:
 
 1. **Device Handling Fixes** - All models now properly support CPU and CUDA GPU devices
 2. **GPU Quantum Circuit Acceleration** - Optional quantum circuit GPU acceleration via PennyLane-Lightning-GPU
 3. **New Lite Model Variants** - Added lightweight Quantum Mamba Lite models
 4. **Experiment Script Support** - Lite models now supported in experiment runner scripts
+5. **Batch Script Updates** - Automated batch scripts now run all 8 models including Lite variants
 
 ---
 
@@ -194,6 +195,61 @@ python experiments/run_single_model_forrelation.py \
 
 ---
 
+## ✅ 5. Batch Script Updates for Complete Model Coverage
+
+### Problem
+After adding Lite model support to experiment scripts, the automated batch scripts (`scripts/run_all_*.sh`) still only ran the 6 core models, excluding the 2 Lite variants. This was inconsistent with the full capability of the codebase.
+
+### Solution
+Updated batch scripts to include Lite models in their model arrays:
+
+**Files Updated:**
+- `scripts/run_all_eeg_experiments.sh`
+- `scripts/run_all_forrelation_experiments.sh`
+
+**Change Made:**
+```bash
+# Before (6 models)
+MODELS=("quantum_hydra" "quantum_hydra_hybrid"
+        "quantum_mamba" "quantum_mamba_hybrid"
+        "classical_hydra" "classical_mamba")
+
+# After (8 models)
+MODELS=("quantum_hydra" "quantum_hydra_hybrid"
+        "quantum_mamba" "quantum_mamba_hybrid"
+        "quantum_mamba_lite" "quantum_mamba_hybrid_lite"
+        "classical_hydra" "classical_mamba")
+```
+
+### Impact
+
+**EEG Experiments:**
+- Before: 18 experiments (6 models × 3 seeds)
+- After: 24 experiments (8 models × 3 seeds)
+- Time: ~15-18 hours → ~20-24 hours
+
+**Forrelation Experiments:**
+- Before: 144 experiments (6 models × 8 datasets × 3 seeds)
+- After: 192 experiments (8 models × 8 datasets × 3 seeds)
+- Time: ~70-80 hours → ~95-100 hours
+
+**MNIST/DNA Experiments:**
+- Unchanged: 18 experiments (6 models × 3 seeds)
+- Reason: Lite variants are time-series only, not applicable to 2D image/sequence data
+
+### Benefits
+- ✅ Comprehensive model comparison out of the box
+- ✅ No need to manually run Lite models separately
+- ✅ Consistent with repository's "8 models" documentation
+- ✅ Fair comparison between all quantum model variants
+
+### Documentation Updates
+Updated documentation to reflect the change:
+- `README.md`: Changed "6 core models" → "all 8 models" for EEG/Forrelation
+- `QUICK_START.md`: Updated experiment counts (18→24, 144→192) and time estimates
+
+---
+
 ## 📝 Updated Model Inventory
 
 ### Before (6 models)
@@ -301,16 +357,23 @@ All changes have been tested and verified:
 
 ### Experiment Scripts
 
-#### Experiment Runners (2 files)
-9. `experiments/run_single_model_eeg.py` - Added Lite model support
-10. `experiments/run_single_model_forrelation.py` - Added Lite model support
+#### Experiment Runners (4 files)
+9. `experiments/run_single_model_eeg.py` - Added Lite model support + device fix
+10. `experiments/run_single_model_forrelation.py` - Added Lite model support + device fix
+11. `experiments/run_single_model_mnist.py` - Added device parameter fix for Classical models
+12. `experiments/run_single_model_dna.py` - Added device parameter fix for Classical models
+
+#### Batch Scripts (2 files)
+13. `scripts/run_all_eeg_experiments.sh` - Added Lite models to model array
+14. `scripts/run_all_forrelation_experiments.sh` - Added Lite models to model array
 
 ### Documentation Files
 
-#### Main Documentation (3 files)
-11. `README.md` - Updated model inventory, usage examples, parameter counts
-12. `QUICK_START.md` - Added Lite models, GPU acceleration notes
-13. `docs/README.md` - Added update notice pointing to UPDATE_NOTES.md
+#### Main Documentation (4 files)
+15. `README.md` - Updated model inventory, batch script notes, experiment counts
+16. `QUICK_START.md` - Updated experiment counts, time estimates
+17. `UPDATE_NOTES.md` - Added Section 5 documenting batch script updates
+18. `docs/README.md` - Added update notice pointing to UPDATE_NOTES.md
 
 ---
 
@@ -323,12 +386,17 @@ All changes have been tested and verified:
 2. GPU quantum circuit acceleration support
 3. Two new Lite model variants
 4. Experiment script support for Lite models
-5. Documentation updates
+5. Classical model GPU fix in experiment scripts
+6. Batch script updates to run all 8 models
+7. Documentation updates
 
 **Commits**:
 - `4ea32d9` - Major update: Device handling, GPU acceleration, Lite models
 - `577f9b6` - Fix README.md inconsistencies
 - `ac0e394` - Add Lite model support to experiment scripts
+- `8f2b4eb` - Update UPDATE_NOTES.md to document experiment script support
+- `911ad99` - Critical fix: Add device parameter to Classical models in experiment scripts
+- (pending) - Add Lite models to batch scripts and update documentation
 
 **Tested on**: Ubuntu 20.04, CUDA 11.8, Python 3.11
 

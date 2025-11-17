@@ -2,7 +2,7 @@
 # Run all EEG experiments on local GPU hardware
 # No SLURM required - runs sequentially
 
-MODELS=("quantum_hydra" "quantum_hydra_hybrid" "quantum_mamba" "quantum_mamba_hybrid" "classical_hydra" "classical_mamba")
+MODELS=("quantum_hydra" "quantum_hydra_hybrid" "quantum_mamba" "quantum_mamba_hybrid" "quantum_mamba_lite" "quantum_mamba_hybrid_lite" "classical_hydra" "classical_mamba")
 SEEDS=(2024 2025 2026)
 
 echo "================================================================================"

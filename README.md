@@ -61,8 +61,7 @@ python experiments/run_single_model_eeg.py \
     --seed 2024 \
     --device cuda
 
-# Run all 6 core models on MNIST (sequential execution)
-# Note: Scripts run the 6 core models. Run Lite models manually if needed.
+# Run all 8 models on MNIST (sequential execution)
 bash scripts/run_all_mnist_experiments.sh
 
 # Generate Forrelation datasets for quantum advantage testing
@@ -155,9 +154,9 @@ quantum-hydra-mamba/
 
 **Note on Automated Scripts:**
 - The repository contains **8 model implementations** (listed above)
-- Automated batch scripts (`scripts/run_all_*.sh`) run the **6 core models** (excluding Lite variants)
-- To use Lite models, run them manually via `experiments/run_single_model_*.py` with appropriate model names
-- Lite models use model names: `quantum_mamba_lite` and `quantum_mamba_hybrid_lite`
+- Automated batch scripts (`scripts/run_all_*.sh`) now run **all 8 models** including Lite variants
+- For EEG and Forrelation: All 8 models are tested (time-series data)
+- For MNIST and DNA: Only 6 models are tested (Lite variants are time-series specific)
 
 ---
 

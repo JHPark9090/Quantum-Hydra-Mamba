@@ -2,7 +2,7 @@
 # Run all Forrelation experiments on local GPU hardware
 # No SLURM required - runs sequentially
 
-MODELS=("quantum_hydra" "quantum_hydra_hybrid" "quantum_mamba" "quantum_mamba_hybrid" "classical_hydra" "classical_mamba")
+MODELS=("quantum_hydra" "quantum_hydra_hybrid" "quantum_mamba" "quantum_mamba_hybrid" "quantum_mamba_lite" "quantum_mamba_hybrid_lite" "classical_hydra" "classical_mamba")
 DATASETS=("forrelation_L20.pt" "forrelation_L40.pt" "forrelation_L80.pt" "forrelation_L160.pt" "forrelation_n8_L40.pt" "forrelation_n8_L80.pt" "forrelation_n8_L160.pt" "forrelation_n8_L320.pt")
 SEEDS=(2024 2025 2026)
 

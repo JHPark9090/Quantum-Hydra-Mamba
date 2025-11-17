@@ -1,6 +1,8 @@
 # Quick Start - 30 Second Guide
 
-Run all 6 models (4 quantum + 2 classical) on all 4 datasets in 5 simple steps.
+Run models (6 quantum + 2 classical = 8 total) on all 4 datasets in 5 simple steps.
+
+**Note:** EEG/Forrelation run all 8 models. MNIST/DNA run 6 models (Lite variants are time-series only).
 
 ---
 
@@ -12,7 +14,7 @@ pip install -r requirements.txt
 
 ---
 
-## Step 2: EEG Experiments (18 runs: 6 models × 3 seeds)
+## Step 2: EEG Experiments (24 runs: 8 models × 3 seeds)
 
 ```bash
 bash scripts/run_all_eeg_experiments.sh
@@ -57,7 +59,7 @@ python experiments/run_single_model_dna.py --model-name classical_hydra --seed 2
 
 ---
 
-## Step 5: Forrelation Experiments (144 runs: 6 models × 8 datasets × 3 seeds)
+## Step 5: Forrelation Experiments (192 runs: 8 models × 8 datasets × 3 seeds)
 
 **Step 5a: Generate datasets first**
 ```bash
@@ -154,12 +156,12 @@ This can provide **additional speedup** for quantum circuit evaluation beyond Py
 
 ## Estimated Time (with GPU)
 
-- **EEG**: ~15-18 hours (18 experiments × ~50 min each)
+- **EEG**: ~20-24 hours (24 experiments × ~50 min each)
 - **MNIST**: ~10-12 hours (18 experiments × ~35 min each)
 - **DNA**: ~6-8 hours (18 experiments × ~25 min each)
-- **Forrelation**: ~70-80 hours (144 experiments × ~30 min each)
+- **Forrelation**: ~95-100 hours (192 experiments × ~30 min each)
 
-**Total:** ~100-120 hours for all experiments
+**Total:** ~130-145 hours for all experiments
 
 **Tip:** Run in `screen` or `tmux` to avoid interruption.
 
