@@ -6,11 +6,12 @@ This document summarizes the major improvements and additions made to the Quantu
 
 ## 🎯 Overview
 
-Three major improvements were implemented:
+Four major improvements were implemented:
 
 1. **Device Handling Fixes** - All models now properly support CPU and CUDA GPU devices
 2. **GPU Quantum Circuit Acceleration** - Optional quantum circuit GPU acceleration via PennyLane-Lightning-GPU
 3. **New Lite Model Variants** - Added lightweight Quantum Mamba Lite models
+4. **Experiment Script Support** - Lite models now supported in experiment runner scripts
 
 ---
 
@@ -149,6 +150,50 @@ model = QuantumMambaHybridTS_Lite(
 
 ---
 
+## ✅ 4. Experiment Script Support for Lite Models
+
+### Problem
+The Lite models were added to the codebase, but the experiment runner scripts didn't support them.
+
+### Solution
+Updated experiment scripts to recognize and create Lite model instances:
+
+**Files Updated:**
+- `experiments/run_single_model_eeg.py`
+- `experiments/run_single_model_forrelation.py`
+
+**Changes Made:**
+1. Added imports for `QuantumMambaTS_Lite` and `QuantumMambaHybridTS_Lite`
+2. Added model creation code for `quantum_mamba_lite` and `quantum_mamba_hybrid_lite`
+3. Updated argparse choices to include Lite model names
+
+### Usage
+```bash
+# Run EEG experiments with Lite models
+python experiments/run_single_model_eeg.py \
+    --model-name quantum_mamba_lite \
+    --n-qubits 6 \
+    --n-epochs 50 \
+    --seed 2024 \
+    --device cuda
+
+# Run Forrelation experiments with Lite models
+python experiments/run_single_model_forrelation.py \
+    --model-name quantum_mamba_hybrid_lite \
+    --dataset-path forrelation_data/forrelation_L20.pt \
+    --seed 2024 \
+    --device cuda
+```
+
+### Impact
+- ✅ Lite models now fully integrated into experiment workflow
+- ✅ Users can run Lite models via command-line experiment scripts
+- ✅ Consistent with documentation (README says to use `run_single_model_*.py`)
+
+**Note:** MNIST and DNA experiments use `QuantumMambaLayer` (2D data), not `QuantumMambaTS` (time-series). Lite variants are time-series only, so they're not applicable to MNIST/DNA.
+
+---
+
 ## 📝 Updated Model Inventory
 
 ### Before (6 models)
@@ -240,7 +285,9 @@ All changes have been tested and verified:
 
 ## 🔍 Files Modified
 
-### Quantum Models (6 files)
+### Model Files
+
+#### Quantum Models (6 files)
 1. `QuantumHydra.py` - Added device handling + GPU quantum device
 2. `QuantumHydraHybrid.py` - Added device handling + GPU quantum device
 3. `QuantumMamba.py` - Added device handling + GPU quantum device
@@ -248,13 +295,22 @@ All changes have been tested and verified:
 5. `QuantumMambaLite.py` - NEW FILE (Lite variant)
 6. `QuantumMambaHybridLite.py` - NEW FILE (Lite variant)
 
-### Classical Models (2 files)
+#### Classical Models (2 files)
 7. `TrueClassicalHydra.py` - Added device parameter
 8. `TrueClassicalMamba.py` - Added device parameter
 
-### Documentation (2 files)
-9. `README.md` - Updated model inventory, usage examples, parameter counts
-10. `QUICK_START.md` - Added Lite models, GPU acceleration notes
+### Experiment Scripts
+
+#### Experiment Runners (2 files)
+9. `experiments/run_single_model_eeg.py` - Added Lite model support
+10. `experiments/run_single_model_forrelation.py` - Added Lite model support
+
+### Documentation Files
+
+#### Main Documentation (3 files)
+11. `README.md` - Updated model inventory, usage examples, parameter counts
+12. `QUICK_START.md` - Added Lite models, GPU acceleration notes
+13. `docs/README.md` - Added update notice pointing to UPDATE_NOTES.md
 
 ---
 
@@ -266,7 +322,13 @@ All changes have been tested and verified:
 1. Device handling fixes across all 8 models
 2. GPU quantum circuit acceleration support
 3. Two new Lite model variants
-4. Documentation updates
+4. Experiment script support for Lite models
+5. Documentation updates
+
+**Commits**:
+- `4ea32d9` - Major update: Device handling, GPU acceleration, Lite models
+- `577f9b6` - Fix README.md inconsistencies
+- `ac0e394` - Add Lite model support to experiment scripts
 
 **Tested on**: Ubuntu 20.04, CUDA 11.8, Python 3.11
 
