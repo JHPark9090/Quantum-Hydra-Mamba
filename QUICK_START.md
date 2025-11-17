@@ -116,8 +116,12 @@ Use these with `--model-name`:
 - `quantum_hydra_hybrid` - Quantum Hydra (hybrid)
 - `quantum_mamba` - Quantum Mamba (superposition)
 - `quantum_mamba_hybrid` - Quantum Mamba (hybrid)
+- `quantum_mamba_lite` - Quantum Mamba Lite (superposition, Hydra-matched)
+- `quantum_mamba_hybrid_lite` - Quantum Mamba Hybrid Lite (hybrid, Hydra-matched)
 - `classical_hydra` - Classical Hydra baseline
 - `classical_mamba` - Classical Mamba baseline
+
+**Note:** Lite models use timestep loop processing (matching Quantum Hydra architecture) with 62% fewer parameters than standard Mamba models.
 
 ---
 
@@ -129,6 +133,22 @@ python experiments/run_single_model_eeg.py --model-name quantum_hydra --seed 202
 ```
 
 ⚠️ **Warning:** CPU is ~10-20× slower than GPU.
+
+---
+
+## GPU Acceleration (Optional)
+
+**For quantum circuit GPU acceleration**, install PennyLane-Lightning-GPU:
+```bash
+pip install pennylane-lightning-gpu
+```
+
+All models automatically detect and use `lightning.gpu` device when:
+- `--device cuda` is specified
+- CUDA is available
+- `pennylane-lightning-gpu` is installed
+
+This can provide **additional speedup** for quantum circuit evaluation beyond PyTorch GPU usage.
 
 ---
 

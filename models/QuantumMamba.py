@@ -51,11 +51,22 @@ class QuantumSelectiveSSM(nn.Module):
         self.b_params = nn.Parameter(torch.rand(n_qubits) * 2 * np.pi)
         self.c_params = nn.Parameter(torch.rand(n_qubits) * 2 * np.pi)
 
-        # Quantum device
-        self.qdev = qml.device("default.qubit", wires=n_qubits)
+        # Quantum device - use GPU if available and requested
+        if device == "cuda" and torch.cuda.is_available():
+            try:
+                self.qdev = qml.device("lightning.gpu", wires=n_qubits)
+            except:
+                import warnings
+                warnings.warn("lightning.gpu not available, using default.qubit (CPU)")
+                self.qdev = qml.device("default.qubit", wires=n_qubits)
+        else:
+            self.qdev = qml.device("default.qubit", wires=n_qubits)
 
         # Setup QNode
         self._setup_qnode()
+
+        # Move parameters to device
+        self.to(device)
 
     def _setup_qnode(self):
         """Create quantum circuit for selective SSM."""
@@ -143,10 +154,21 @@ class QuantumGatingPath(nn.Module):
         # Gating parameters
         self.gate_params = nn.Parameter(torch.rand(n_qubits) * 2 * np.pi)
 
-        # Quantum device
-        self.qdev = qml.device("default.qubit", wires=n_qubits)
+        # Quantum device - use GPU if available and requested
+        if device == "cuda" and torch.cuda.is_available():
+            try:
+                self.qdev = qml.device("lightning.gpu", wires=n_qubits)
+            except:
+                import warnings
+                warnings.warn("lightning.gpu not available, using default.qubit (CPU)")
+                self.qdev = qml.device("default.qubit", wires=n_qubits)
+        else:
+            self.qdev = qml.device("default.qubit", wires=n_qubits)
 
         self._setup_qnode()
+
+        # Move parameters to device
+        self.to(device)
 
     def _setup_qnode(self):
         """Create quantum circuit for gating."""
@@ -254,7 +276,16 @@ class QuantumMambaLayer(nn.Module):
 
         # Skip path parameters (diagonal operation)
         self.skip_params = nn.Parameter(torch.rand(n_qubits) * 2 * np.pi)
-        self.qdev_skip = qml.device("default.qubit", wires=n_qubits)
+        # Quantum device for skip path - use GPU if available and requested
+        if device == "cuda" and torch.cuda.is_available():
+            try:
+                self.qdev_skip = qml.device("lightning.gpu", wires=n_qubits)
+            except:
+                import warnings
+                warnings.warn("lightning.gpu not available, using default.qubit (CPU)")
+                self.qdev_skip = qml.device("default.qubit", wires=n_qubits)
+        else:
+            self.qdev_skip = qml.device("default.qubit", wires=n_qubits)
         self._setup_skip_qnode()
 
         # Output processing
@@ -267,6 +298,9 @@ class QuantumMambaLayer(nn.Module):
         )
 
         self.dropout = nn.Dropout(dropout)
+
+        # Move all parameters to specified device
+        self.to(device)
 
     def _setup_skip_qnode(self):
         """Setup quantum circuit for skip connection."""
@@ -404,6 +438,9 @@ class QuantumMambaTS(nn.Module):
             dropout=dropout,
             device=device
         )
+
+        # Move all parameters to specified device
+        self.to(device)
 
     def forward(self, x):
         """

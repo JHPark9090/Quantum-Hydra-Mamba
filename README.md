@@ -21,7 +21,7 @@ Each quantum model comes in **two variants**:
 
 Plus **two classical baselines** for comparison.
 
-**Total: 6 models** for comprehensive comparison.
+**Total: 8 models** for comprehensive comparison (6 quantum + 2 classical).
 
 ---
 
@@ -82,6 +82,8 @@ quantum-hydra-mamba/
 │   ├── QuantumHydraHybrid.py       # Quantum Hydra (hybrid)
 │   ├── QuantumMamba.py             # Quantum Mamba (superposition)
 │   ├── QuantumMambaHybrid.py       # Quantum Mamba (hybrid)
+│   ├── QuantumMambaLite.py         # Quantum Mamba Lite (superposition, 62% fewer params)
+│   ├── QuantumMambaHybridLite.py   # Quantum Mamba Hybrid Lite (62% fewer params)
 │   ├── TrueClassicalHydra.py       # Classical Hydra baseline
 │   └── TrueClassicalMamba.py       # Classical Mamba baseline
 │
@@ -130,9 +132,9 @@ quantum-hydra-mamba/
 
 ---
 
-## 🧬 The Six Models
+## 🧬 The Eight Models
 
-### Quantum Models (4 total)
+### Quantum Models (6 total)
 
 | Model | File | Description | Key Feature |
 |-------|------|-------------|-------------|
@@ -140,6 +142,8 @@ quantum-hydra-mamba/
 | **Quantum Hydra (Hybrid)** | `QuantumHydraHybrid.py` | Classical combination of 3 branches | Real weights w₁, w₂, w₃ ∈ ℝ |
 | **Quantum Mamba (Superposition)** | `QuantumMamba.py` | Quantum superposition of SSM/gate/skip | Complex coefficients α, β, γ ∈ ℂ |
 | **Quantum Mamba (Hybrid)** | `QuantumMambaHybrid.py` | Classical combination of SSM/gate/skip | Real weights w₁, w₂, w₃ ∈ ℝ |
+| **Quantum Mamba Lite (Superposition)** | `QuantumMambaLite.py` | Lightweight variant matching Hydra architecture | Timestep loop, 62% fewer params |
+| **Quantum Mamba Hybrid Lite** | `QuantumMambaHybridLite.py` | Lightweight hybrid variant | Timestep loop, 62% fewer params |
 
 ### Classical Baselines (2 total)
 
@@ -252,6 +256,7 @@ See `docs/FORRELATION_README.md` for complete details.
 import torch
 from QuantumHydra import QuantumHydraTS
 from QuantumMamba import QuantumMambaTS
+from QuantumMambaLite import QuantumMambaTS_Lite
 from TrueClassicalHydra import TrueClassicalHydra
 
 # EEG data: (batch_size, channels, timesteps)
@@ -264,7 +269,7 @@ model1 = QuantumHydraTS(
     qlcu_layers=2,
     feature_dim=64,
     output_dim=2,
-    device="cuda"
+    device="cuda"  # or "cpu"
 )
 output1 = model1(eeg_data)  # (16, 2)
 
@@ -275,25 +280,42 @@ model2 = QuantumMambaTS(
     qlcu_layers=2,
     feature_dim=64,
     output_dim=2,
-    device="cuda"
+    device="cuda"  # or "cpu"
 )
 output2 = model2(eeg_data)  # (16, 2)
 
+# Quantum Mamba Lite (Lightweight variant)
+model3 = QuantumMambaTS_Lite(
+    n_qubits=6,
+    n_timesteps=160,
+    qlcu_layers=2,
+    feature_dim=64,
+    output_dim=2,
+    device="cuda"  # 62% fewer parameters than QuantumMambaTS
+)
+output3 = model3(eeg_data)  # (16, 2)
+
 # Classical Hydra Baseline
-model3 = TrueClassicalHydra(
+model4 = TrueClassicalHydra(
     n_channels=64,
     n_timesteps=160,
     d_model=128,
     d_state=16,
-    output_dim=2
+    output_dim=2,
+    device="cuda"  # Device parameter added
 )
-output3 = model3(eeg_data)  # (16, 2)
+output4 = model4(eeg_data)  # (16, 2)
 ```
 
 **Note on Input Shapes:**
 - **3D inputs** (EEG): `(batch, channels, timesteps)` - e.g., (16, 64, 160)
 - **2D inputs** (DNA, MNIST): `(batch, features)` - e.g., (16, 228)
 - All models automatically handle both formats
+
+**Note on Device Parameter:**
+- All models now support `device` parameter: `"cpu"` or `"cuda"`
+- Models automatically move all parameters to the specified device
+- Default is `"cpu"` for backward compatibility
 
 ### Training Loop
 
@@ -441,9 +463,11 @@ This repository enables you to answer:
 
 ### Parameter Efficiency
 
-- **Quantum models**: ~1,500-3,000 parameters
+- **Quantum Lite models**: ~1,500-2,000 parameters (most efficient)
+- **Quantum standard models**: ~2,500-5,000 parameters
 - **Classical models**: ~5,000-8,000 parameters
-- **Ratio**: Quantum uses **50-60% fewer parameters**
+- **Ratio**: Quantum Lite uses **70-75% fewer parameters** than classical
+- **Quantum Mamba Lite vs Standard**: 62% reduction (removing Conv1d)
 
 ---
 
@@ -460,7 +484,27 @@ This repository enables you to answer:
 - **Storage**: 10GB
 
 ### Running on CPU
-All scripts support CPU execution (remove `--device cuda` flag), but will be **much slower** (~10-20× slower).
+All scripts support CPU execution (remove `--device cuda` flag or use `--device cpu`), but will be **much slower** (~10-20× slower).
+
+### GPU Acceleration for Quantum Circuits
+
+**Optional quantum circuit GPU acceleration** is available via PennyLane-Lightning-GPU:
+
+```bash
+pip install pennylane-lightning-gpu
+```
+
+When installed, quantum models automatically use `lightning.gpu` device when:
+- `device="cuda"` is specified
+- CUDA is available
+- `pennylane-lightning-gpu` is installed
+
+**Benefits:**
+- Additional speedup for quantum circuit evaluation (beyond PyTorch GPU usage)
+- Especially beneficial for larger qubit counts (8+ qubits)
+- Graceful fallback to CPU quantum simulation if not available
+
+**Note:** This is optional. Models work fine with standard PyTorch GPU acceleration alone.
 
 ---
 

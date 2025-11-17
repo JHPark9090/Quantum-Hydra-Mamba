@@ -118,11 +118,10 @@ class SelectiveSSM(nn.Module):
         # Get A matrix
         A = -torch.exp(self.A_log.float())  # (d_model, d_state)
 
-        # Discretize A with dt
+        # Discretize A with dt using Zero-Order Hold (ZOH)
         # A_discrete = exp(A * dt)
-        # For simplicity, we use first-order approximation: A_discrete ≈ 1 + A * dt
         dt_expanded = dt.unsqueeze(-1)  # (batch, seq_len, d_model, 1)
-        A_discrete = 1 + A.unsqueeze(0).unsqueeze(0) * dt_expanded
+        A_discrete = torch.exp(A.unsqueeze(0).unsqueeze(0) * dt_expanded)
         # (batch, seq_len, d_model, d_state)
 
         # Simplified recurrent scan (this is the core SSM operation)
@@ -321,12 +320,14 @@ class TrueClassicalHydra(nn.Module):
         expand=2,
         output_dim=2,
         dropout=0.1,
+        device: str = "cpu",
     ):
         super().__init__()
 
         self.n_channels = n_channels
         self.n_timesteps = n_timesteps
         self.d_model = d_model
+        self.device = device
 
         # Input embedding: project channels to d_model
         self.embedding = nn.Linear(n_channels, d_model)
@@ -362,6 +363,9 @@ class TrueClassicalHydra(nn.Module):
             nn.Linear(d_model // 2, output_dim)
         )
 
+        # Move all parameters to specified device
+        self.to(device)
+
     def forward(self, x):
         """
         Forward pass.
@@ -375,13 +379,13 @@ class TrueClassicalHydra(nn.Module):
         """
         # Handle both 2D and 3D inputs
         if x.dim() == 2:
-            # 2D input: (B, features) -> (B, features, 1) -> (B, 1, features)
-            x = x.unsqueeze(-1).transpose(1, 2)
-        elif x.dim() == 3:
-            # 3D input: (B, C, T) -> (B, T, C)
-            x = x.transpose(1, 2)
-        else:
+            # 2D input: (B, features) -> (B, 1, features)
+            x = x.unsqueeze(1)
+        elif x.dim() != 3:
             raise ValueError(f"Expected 2D or 3D input, got {x.dim()}D tensor")
+
+        # Now x is 3D: (B, C, T) -> (B, T, C)
+        x = x.transpose(1, 2)
 
         # Embed: (B, T, C) -> (B, T, d_model)
         x = self.embedding(x)

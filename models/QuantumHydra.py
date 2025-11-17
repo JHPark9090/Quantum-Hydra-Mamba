@@ -501,11 +501,23 @@ class QuantumHydraLayer(nn.Module):
         self.qlcu_base_params = nn.Parameter(torch.rand(self.n_qlcu_params))
         self.qd_params = nn.Parameter(torch.rand(self.n_qd_params))
 
-        # PennyLane quantum device
-        self.dev = qml.device("default.qubit", wires=self.n_qubits)
+        # PennyLane quantum device - use GPU if available and requested
+        if device == "cuda" and torch.cuda.is_available():
+            try:
+                self.dev = qml.device("lightning.gpu", wires=self.n_qubits)
+            except:
+                # Fallback if lightning.gpu not installed
+                import warnings
+                warnings.warn("lightning.gpu not available, using default.qubit (CPU)")
+                self.dev = qml.device("default.qubit", wires=self.n_qubits)
+        else:
+            self.dev = qml.device("default.qubit", wires=self.n_qubits)
 
         # Define QNodes for each operation
         self._setup_qnodes()
+
+        # Move all parameters to specified device
+        self.to(device)
 
     def _setup_qnodes(self):
         """Setup PennyLane QNodes for quantum operations."""
@@ -697,6 +709,9 @@ class QuantumHydraTS(nn.Module):
 
         # Final output layer
         self.output_layer = nn.Linear(3 * n_qubits, output_dim)
+
+        # Move all parameters to specified device
+        self.to(device)
 
     def forward(self, x):
         """

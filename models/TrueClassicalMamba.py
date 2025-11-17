@@ -267,9 +267,11 @@ class TrueClassicalMamba(nn.Module):
         expand=2,
         output_dim=2,
         dropout=0.1,
+        device: str = "cpu",
     ):
         super().__init__()
 
+        self.device = device
         self.embedding = nn.Linear(n_channels, d_model)
         self.dropout = nn.Dropout(dropout)
 
@@ -287,6 +289,9 @@ class TrueClassicalMamba(nn.Module):
         self.pool = nn.AdaptiveAvgPool1d(1)
         self.classifier = nn.Linear(d_model, output_dim)
 
+        # Move all parameters to specified device
+        self.to(device)
+
     def forward(self, x):
         """
         Args:
@@ -295,13 +300,13 @@ class TrueClassicalMamba(nn.Module):
         """
         # Handle both 2D and 3D inputs
         if x.dim() == 2:
-            # 2D input: (B, features) -> (B, features, 1) -> (B, 1, features)
-            x = x.unsqueeze(-1).transpose(1, 2)
-        elif x.dim() == 3:
-            # 3D input: (B, C, T) -> (B, T, C)
-            x = x.transpose(1, 2)
-        else:
+            # 2D input: (B, features) -> (B, 1, features)
+            x = x.unsqueeze(1)
+        elif x.dim() != 3:
             raise ValueError(f"Expected 2D or 3D input, got {x.dim()}D tensor")
+
+        # Now x is 3D: (B, C, T) -> (B, T, C)
+        x = x.transpose(1, 2)
         x = self.embedding(x)
         x = self.dropout(x)
 
