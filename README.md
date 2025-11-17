@@ -61,7 +61,8 @@ python experiments/run_single_model_eeg.py \
     --seed 2024 \
     --device cuda
 
-# Run all 6 models on MNIST (sequential execution)
+# Run all 6 core models on MNIST (sequential execution)
+# Note: Scripts run the 6 core models. Run Lite models manually if needed.
 bash scripts/run_all_mnist_experiments.sh
 
 # Generate Forrelation datasets for quantum advantage testing
@@ -123,8 +124,8 @@ quantum-hydra-mamba/
 │   └── Quantum_Advantage_Test_Plan.md
 │
 ├── QUICK_START.md                   # 30-second command guide
-├── GITHUB_REPO_SUMMARY.md           # Repository summary
-├── GITHUB_UPLOAD_INSTRUCTIONS.md    # GitHub upload guide
+├── UPDATE_NOTES.md                  # November 2025 update changelog
+├── REPOSITORY_STATUS.md             # Repository status summary
 ├── requirements.txt                 # Python dependencies
 ├── .gitignore                       # Git ignore file
 └── README.md                        # This file
@@ -152,6 +153,12 @@ quantum-hydra-mamba/
 | **True Classical Hydra** | `TrueClassicalHydra.py` | Faithful implementation of Hwang et al. (2024) |
 | **True Classical Mamba** | `TrueClassicalMamba.py` | Faithful implementation of Gu & Dao (2024) |
 
+**Note on Automated Scripts:**
+- The repository contains **8 model implementations** (listed above)
+- Automated batch scripts (`scripts/run_all_*.sh`) run the **6 core models** (excluding Lite variants)
+- To use Lite models, run them manually via `experiments/run_single_model_*.py` with appropriate model names
+- Lite models use model names: `quantum_mamba_lite` and `quantum_mamba_hybrid_lite`
+
 ---
 
 ## 🧪 Experiments
@@ -171,7 +178,7 @@ python experiments/run_single_model_eeg.py \
     --model-name quantum_hydra \
     --seed 2024
 
-# All 6 models (sequential)
+# All 6 core models (sequential)
 bash scripts/run_all_eeg_experiments.sh
 ```
 
@@ -192,7 +199,7 @@ python experiments/run_single_model_mnist.py \
     --model-name quantum_mamba \
     --seed 2024
 
-# All 6 models
+# All 6 core models
 bash scripts/run_all_mnist_experiments.sh
 ```
 
@@ -214,7 +221,7 @@ python experiments/run_single_model_dna.py \
     --encoding onehot \
     --seed 2024
 
-# All 6 models
+# All 6 core models
 bash scripts/run_all_dna_experiments.sh
 ```
 
@@ -233,7 +240,7 @@ bash scripts/run_all_dna_experiments.sh
 # Step 1: Generate datasets
 bash scripts/generate_forrelation_datasets.sh
 
-# Step 2: Run experiments (144 total: 6 models × 8 datasets × 3 seeds)
+# Step 2: Run experiments (144 total: 6 core models × 8 datasets × 3 seeds)
 bash scripts/run_all_forrelation_experiments.sh
 
 # Step 3: Analyze quantum advantage
@@ -429,7 +436,7 @@ early_stopping_patience = 15
 This repository enables you to answer:
 
 1. **Do quantum models outperform classical baselines?**
-   - Compare accuracy across all 6 models
+   - Compare accuracy across all models (6 core + 2 Lite variants)
    - Test on 4 different datasets
 
 2. **Is quantum advantage architecture-specific?**
