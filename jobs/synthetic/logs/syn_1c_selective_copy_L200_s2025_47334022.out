@@ -1,0 +1,221 @@
+Starting job: syn_1c_selective_copy_L200_s2025
+Date: Mon 05 Jan 2026 07:35:22 PM PST
+Host: nid008297
+GPU: NVIDIA A100-SXM4-80GB
+Using GPU: NVIDIA A100-SXM4-80GB
+================================================================================
+SYNTHETIC BENCHMARK - SELECTIVE_COPY
+================================================================================
+Model ID: 1c (QuantumHydraSSM)
+  Group 1: quantum feat → classical mix (hydra)
+Task: selective_copy (regression)
+Sequence Length: 200
+Seed: 2025
+Device: cuda
+--------------------------------------------------------------------------------
+Hyperparameters:
+  n_qubits=6, n_layers=2
+  d_model=128, d_state=16
+  epochs=100, batch_size=32
+  lr=0.001, weight_decay=0.0001
+  early_stopping=20
+================================================================================
+
+Loading Data...
+Loading Selective Copy dataset from data/synthetic_benchmarks/selective_copy/selective_copy_L200_M8_seed2025.pt...
+Dataset loaded successfully.
+  - Task: selective_copy
+  - Sequence length: 200
+  - Num channels: 2
+  - Num markers: 8
+  - Output length: 8
+  - Total samples: 5000
+  - Marker density: 4.0%
+  - Baseline MSE: 0.0839
+  - Input shape for model: torch.Size([5000, 2, 200])
+  - Target shape: torch.Size([5000, 8])
+  - Training set: 4000
+  - Validation set: 500
+  - Test set: 500
+Data loaded!
+  Input: (2 channels, 200 timesteps)
+  Output dim: 8
+
+Creating model...
+Creating model: QuantumHydraSSM (ID: 1c)
+  Group 1: quantum features → classical mixing (hydra)
+Model parameters: 910,868
+Verifying device placement...
+  WARNING: alpha is on cuda:0, moving to cuda
+  WARNING: beta is on cuda:0, moving to cuda
+  WARNING: gamma is on cuda:0, moving to cuda
+  WARNING: feature_proj.0.weight is on cuda:0, moving to cuda
+  WARNING: feature_proj.0.bias is on cuda:0, moving to cuda
+  WARNING: feature_proj.1.weight is on cuda:0, moving to cuda
+  WARNING: feature_proj.1.bias is on cuda:0, moving to cuda
+  WARNING: quantum_forward.chunk_attention.0.weight is on cuda:0, moving to cuda
+  WARNING: quantum_forward.chunk_attention.0.bias is on cuda:0, moving to cuda
+  WARNING: quantum_forward.chunk_attention.2.weight is on cuda:0, moving to cuda
+  WARNING: quantum_forward.chunk_attention.2.bias is on cuda:0, moving to cuda
+  WARNING: quantum_forward.quantum_branches.alpha_real is on cuda:0, moving to cuda
+  WARNING: quantum_forward.quantum_branches.alpha_imag is on cuda:0, moving to cuda
+  WARNING: quantum_forward.quantum_branches.beta_real is on cuda:0, moving to cuda
+  WARNING: quantum_forward.quantum_branches.beta_imag is on cuda:0, moving to cuda
+  WARNING: quantum_forward.quantum_branches.gamma_real is on cuda:0, moving to cuda
+  WARNING: quantum_forward.quantum_branches.gamma_imag is on cuda:0, moving to cuda
+  WARNING: quantum_forward.quantum_branches.proj1.weight is on cuda:0, moving to cuda
+  WARNING: quantum_forward.quantum_branches.proj1.bias is on cuda:0, moving to cuda
+  WARNING: quantum_forward.quantum_branches.proj2.weight is on cuda:0, moving to cuda
+  WARNING: quantum_forward.quantum_branches.proj2.bias is on cuda:0, moving to cuda
+  WARNING: quantum_forward.quantum_branches.proj3.weight is on cuda:0, moving to cuda
+  WARNING: quantum_forward.quantum_branches.proj3.bias is on cuda:0, moving to cuda
+  WARNING: quantum_forward.quantum_branches.input_proj.weight is on cuda:0, moving to cuda
+  WARNING: quantum_forward.quantum_branches.input_proj.bias is on cuda:0, moving to cuda
+  WARNING: quantum_forward.output_proj.0.weight is on cuda:0, moving to cuda
+  WARNING: quantum_forward.output_proj.0.bias is on cuda:0, moving to cuda
+  WARNING: quantum_forward.output_proj.1.weight is on cuda:0, moving to cuda
+  WARNING: quantum_forward.output_proj.1.bias is on cuda:0, moving to cuda
+  WARNING: quantum_backward.chunk_attention.0.weight is on cuda:0, moving to cuda
+  WARNING: quantum_backward.chunk_attention.0.bias is on cuda:0, moving to cuda
+  WARNING: quantum_backward.chunk_attention.2.weight is on cuda:0, moving to cuda
+  WARNING: quantum_backward.chunk_attention.2.bias is on cuda:0, moving to cuda
+  WARNING: quantum_backward.quantum_branches.alpha_real is on cuda:0, moving to cuda
+  WARNING: quantum_backward.quantum_branches.alpha_imag is on cuda:0, moving to cuda
+  WARNING: quantum_backward.quantum_branches.beta_real is on cuda:0, moving to cuda
+  WARNING: quantum_backward.quantum_branches.beta_imag is on cuda:0, moving to cuda
+  WARNING: quantum_backward.quantum_branches.gamma_real is on cuda:0, moving to cuda
+  WARNING: quantum_backward.quantum_branches.gamma_imag is on cuda:0, moving to cuda
+  WARNING: quantum_backward.quantum_branches.proj1.weight is on cuda:0, moving to cuda
+  WARNING: quantum_backward.quantum_branches.proj1.bias is on cuda:0, moving to cuda
+  WARNING: quantum_backward.quantum_branches.proj2.weight is on cuda:0, moving to cuda
+  WARNING: quantum_backward.quantum_branches.proj2.bias is on cuda:0, moving to cuda
+  WARNING: quantum_backward.quantum_branches.proj3.weight is on cuda:0, moving to cuda
+  WARNING: quantum_backward.quantum_branches.proj3.bias is on cuda:0, moving to cuda
+  WARNING: quantum_backward.quantum_branches.input_proj.weight is on cuda:0, moving to cuda
+  WARNING: quantum_backward.quantum_branches.input_proj.bias is on cuda:0, moving to cuda
+  WARNING: quantum_backward.output_proj.0.weight is on cuda:0, moving to cuda
+  WARNING: quantum_backward.output_proj.0.bias is on cuda:0, moving to cuda
+  WARNING: quantum_backward.output_proj.1.weight is on cuda:0, moving to cuda
+  WARNING: quantum_backward.output_proj.1.bias is on cuda:0, moving to cuda
+  WARNING: quantum_diagonal.chunk_attention.0.weight is on cuda:0, moving to cuda
+  WARNING: quantum_diagonal.chunk_attention.0.bias is on cuda:0, moving to cuda
+  WARNING: quantum_diagonal.chunk_attention.2.weight is on cuda:0, moving to cuda
+  WARNING: quantum_diagonal.chunk_attention.2.bias is on cuda:0, moving to cuda
+  WARNING: quantum_diagonal.quantum_branches.alpha_real is on cuda:0, moving to cuda
+  WARNING: quantum_diagonal.quantum_branches.alpha_imag is on cuda:0, moving to cuda
+  WARNING: quantum_diagonal.quantum_branches.beta_real is on cuda:0, moving to cuda
+  WARNING: quantum_diagonal.quantum_branches.beta_imag is on cuda:0, moving to cuda
+  WARNING: quantum_diagonal.quantum_branches.gamma_real is on cuda:0, moving to cuda
+  WARNING: quantum_diagonal.quantum_branches.gamma_imag is on cuda:0, moving to cuda
+  WARNING: quantum_diagonal.quantum_branches.proj1.weight is on cuda:0, moving to cuda
+  WARNING: quantum_diagonal.quantum_branches.proj1.bias is on cuda:0, moving to cuda
+  WARNING: quantum_diagonal.quantum_branches.proj2.weight is on cuda:0, moving to cuda
+  WARNING: quantum_diagonal.quantum_branches.proj2.bias is on cuda:0, moving to cuda
+  WARNING: quantum_diagonal.quantum_branches.proj3.weight is on cuda:0, moving to cuda
+  WARNING: quantum_diagonal.quantum_branches.proj3.bias is on cuda:0, moving to cuda
+  WARNING: quantum_diagonal.quantum_branches.input_proj.weight is on cuda:0, moving to cuda
+  WARNING: quantum_diagonal.quantum_branches.input_proj.bias is on cuda:0, moving to cuda
+  WARNING: quantum_diagonal.output_proj.0.weight is on cuda:0, moving to cuda
+  WARNING: quantum_diagonal.output_proj.0.bias is on cuda:0, moving to cuda
+  WARNING: quantum_diagonal.output_proj.1.weight is on cuda:0, moving to cuda
+  WARNING: quantum_diagonal.output_proj.1.bias is on cuda:0, moving to cuda
+  WARNING: hydra_layers.0.in_proj.weight is on cuda:0, moving to cuda
+  WARNING: hydra_layers.0.bidirectional_ssm.alpha is on cuda:0, moving to cuda
+  WARNING: hydra_layers.0.bidirectional_ssm.beta is on cuda:0, moving to cuda
+  WARNING: hydra_layers.0.bidirectional_ssm.gamma is on cuda:0, moving to cuda
+  WARNING: hydra_layers.0.bidirectional_ssm.forward_ssm.A_log is on cuda:0, moving to cuda
+  WARNING: hydra_layers.0.bidirectional_ssm.forward_ssm.D is on cuda:0, moving to cuda
+  WARNING: hydra_layers.0.bidirectional_ssm.forward_ssm.x_proj.weight is on cuda:0, moving to cuda
+  WARNING: hydra_layers.0.bidirectional_ssm.forward_ssm.dt_proj.weight is on cuda:0, moving to cuda
+  WARNING: hydra_layers.0.bidirectional_ssm.forward_ssm.dt_proj.bias is on cuda:0, moving to cuda
+  WARNING: hydra_layers.0.bidirectional_ssm.forward_ssm.out_proj.weight is on cuda:0, moving to cuda
+  WARNING: hydra_layers.0.bidirectional_ssm.backward_ssm.A_log is on cuda:0, moving to cuda
+  WARNING: hydra_layers.0.bidirectional_ssm.backward_ssm.D is on cuda:0, moving to cuda
+  WARNING: hydra_layers.0.bidirectional_ssm.backward_ssm.x_proj.weight is on cuda:0, moving to cuda
+  WARNING: hydra_layers.0.bidirectional_ssm.backward_ssm.dt_proj.weight is on cuda:0, moving to cuda
+  WARNING: hydra_layers.0.bidirectional_ssm.backward_ssm.dt_proj.bias is on cuda:0, moving to cuda
+  WARNING: hydra_layers.0.bidirectional_ssm.backward_ssm.out_proj.weight is on cuda:0, moving to cuda
+  WARNING: hydra_layers.0.bidirectional_ssm.diagonal.weight is on cuda:0, moving to cuda
+  WARNING: hydra_layers.0.bidirectional_ssm.out_proj.weight is on cuda:0, moving to cuda
+  WARNING: hydra_layers.0.bidirectional_ssm.norm.weight is on cuda:0, moving to cuda
+  WARNING: hydra_layers.0.bidirectional_ssm.norm.bias is on cuda:0, moving to cuda
+  WARNING: hydra_layers.0.out_proj.weight is on cuda:0, moving to cuda
+  WARNING: hydra_layers.0.norm.weight is on cuda:0, moving to cuda
+  WARNING: hydra_layers.0.norm.bias is on cuda:0, moving to cuda
+  WARNING: hydra_layers.1.in_proj.weight is on cuda:0, moving to cuda
+  WARNING: hydra_layers.1.bidirectional_ssm.alpha is on cuda:0, moving to cuda
+  WARNING: hydra_layers.1.bidirectional_ssm.beta is on cuda:0, moving to cuda
+  WARNING: hydra_layers.1.bidirectional_ssm.gamma is on cuda:0, moving to cuda
+  WARNING: hydra_layers.1.bidirectional_ssm.forward_ssm.A_log is on cuda:0, moving to cuda
+  WARNING: hydra_layers.1.bidirectional_ssm.forward_ssm.D is on cuda:0, moving to cuda
+  WARNING: hydra_layers.1.bidirectional_ssm.forward_ssm.x_proj.weight is on cuda:0, moving to cuda
+  WARNING: hydra_layers.1.bidirectional_ssm.forward_ssm.dt_proj.weight is on cuda:0, moving to cuda
+  WARNING: hydra_layers.1.bidirectional_ssm.forward_ssm.dt_proj.bias is on cuda:0, moving to cuda
+  WARNING: hydra_layers.1.bidirectional_ssm.forward_ssm.out_proj.weight is on cuda:0, moving to cuda
+  WARNING: hydra_layers.1.bidirectional_ssm.backward_ssm.A_log is on cuda:0, moving to cuda
+  WARNING: hydra_layers.1.bidirectional_ssm.backward_ssm.D is on cuda:0, moving to cuda
+  WARNING: hydra_layers.1.bidirectional_ssm.backward_ssm.x_proj.weight is on cuda:0, moving to cuda
+  WARNING: hydra_layers.1.bidirectional_ssm.backward_ssm.dt_proj.weight is on cuda:0, moving to cuda
+  WARNING: hydra_layers.1.bidirectional_ssm.backward_ssm.dt_proj.bias is on cuda:0, moving to cuda
+  WARNING: hydra_layers.1.bidirectional_ssm.backward_ssm.out_proj.weight is on cuda:0, moving to cuda
+  WARNING: hydra_layers.1.bidirectional_ssm.diagonal.weight is on cuda:0, moving to cuda
+  WARNING: hydra_layers.1.bidirectional_ssm.out_proj.weight is on cuda:0, moving to cuda
+  WARNING: hydra_layers.1.bidirectional_ssm.norm.weight is on cuda:0, moving to cuda
+  WARNING: hydra_layers.1.bidirectional_ssm.norm.bias is on cuda:0, moving to cuda
+  WARNING: hydra_layers.1.out_proj.weight is on cuda:0, moving to cuda
+  WARNING: hydra_layers.1.norm.weight is on cuda:0, moving to cuda
+  WARNING: hydra_layers.1.norm.bias is on cuda:0, moving to cuda
+  WARNING: output_norm.weight is on cuda:0, moving to cuda
+  WARNING: output_norm.bias is on cuda:0, moving to cuda
+  WARNING: output_layer.weight is on cuda:0, moving to cuda
+  WARNING: output_layer.bias is on cuda:0, moving to cuda
+Model moved to cuda
+
+================================================================================
+Training Started (epochs 1 to 100)
+================================================================================
+
+Epoch   1/100 (114.6s) * | Train MSE: 0.095238 | Val MSE: 0.078372
+Epoch   2/100 (114.2s) * | Train MSE: 0.069847 | Val MSE: 0.060769
+Epoch   3/100 (113.8s) * | Train MSE: 0.060026 | Val MSE: 0.057694
+Epoch   4/100 (114.2s) * | Train MSE: 0.055731 | Val MSE: 0.050839
+Epoch   5/100 (112.1s) | Train MSE: 0.052100 | Val MSE: 0.056381
+Epoch   6/100 (110.0s) * | Train MSE: 0.048799 | Val MSE: 0.048038
+Epoch   7/100 (109.9s) * | Train MSE: 0.044391 | Val MSE: 0.043196
+Epoch   8/100 (110.4s) * | Train MSE: 0.041865 | Val MSE: 0.041792
+Epoch   9/100 (110.4s) * | Train MSE: 0.040633 | Val MSE: 0.040640
+Epoch  10/100 (110.1s) * | Train MSE: 0.039188 | Val MSE: 0.037888
+Epoch  11/100 (110.9s) * | Train MSE: 0.037604 | Val MSE: 0.036793
+Epoch  12/100 (111.4s) * | Train MSE: 0.036214 | Val MSE: 0.036148
+Epoch  13/100 (111.0s) * | Train MSE: 0.035572 | Val MSE: 0.033489
+Epoch  14/100 (111.2s) * | Train MSE: 0.034288 | Val MSE: 0.033269
+Epoch  15/100 (111.1s) | Train MSE: 0.034560 | Val MSE: 0.035296
+Epoch  16/100 (110.6s) * | Train MSE: 0.033942 | Val MSE: 0.031934
+Epoch  18/100 (111.0s) * | Train MSE: 0.032324 | Val MSE: 0.031532
+Epoch  19/100 (111.2s) * | Train MSE: 0.031725 | Val MSE: 0.031482
+Epoch  20/100 (111.0s) * | Train MSE: 0.030753 | Val MSE: 0.030055
+Epoch  21/100 (109.9s) * | Train MSE: 0.030612 | Val MSE: 0.029841
+Epoch  24/100 (110.0s) * | Train MSE: 0.029332 | Val MSE: 0.029056
+Epoch  25/100 (110.3s) | Train MSE: 0.029307 | Val MSE: 0.031424
+Epoch  30/100 (110.4s) | Train MSE: 0.026970 | Val MSE: 0.030037
+Epoch  31/100 (112.1s) * | Train MSE: 0.027406 | Val MSE: 0.028138
+Epoch  35/100 (111.4s) | Train MSE: 0.024799 | Val MSE: 0.030675
+Epoch  40/100 (110.6s) | Train MSE: 0.022486 | Val MSE: 0.031352
+Epoch  45/100 (110.8s) | Train MSE: 0.018570 | Val MSE: 0.035813
+Epoch  50/100 (110.1s) | Train MSE: 0.013990 | Val MSE: 0.033989
+
+Early stopping at epoch 51 (no improvement for 20 epochs)
+
+================================================================================
+Training Complete!
+================================================================================
+Total Time: 5662.56s (94.38 min)
+Best Val MSE: 0.028138
+Test Results:
+  MSE: 0.028782
+  MAE: 0.121421
+  R²: 0.6556
+  Baseline MSE: 0.0830
+  Improvement over baseline: 65.3%
+Job completed: syn_1c_selective_copy_L200_s2025
+End time: Mon 05 Jan 2026 09:10:00 PM PST

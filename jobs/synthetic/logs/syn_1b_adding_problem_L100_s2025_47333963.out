@@ -1,0 +1,142 @@
+Starting job: syn_1b_adding_problem_L100_s2025
+Date: Sun 04 Jan 2026 03:48:28 AM PST
+Host: nid008429
+GPU: NVIDIA A100-SXM4-80GB
+Using GPU: NVIDIA A100-SXM4-80GB
+================================================================================
+SYNTHETIC BENCHMARK - ADDING_PROBLEM
+================================================================================
+Model ID: 1b (QuantumMambaSSM)
+  Group 1: quantum feat → classical mix (mamba)
+Task: adding_problem (regression)
+Sequence Length: 100
+Seed: 2025
+Device: cuda
+--------------------------------------------------------------------------------
+Hyperparameters:
+  n_qubits=6, n_layers=2
+  d_model=128, d_state=16
+  epochs=100, batch_size=32
+  lr=0.001, weight_decay=0.0001
+  early_stopping=20
+================================================================================
+
+Loading Data...
+Loading Adding Problem dataset from data/synthetic_benchmarks/adding_problem/adding_L100_seed2025.pt...
+Dataset loaded successfully.
+  - Task: adding_problem
+  - Sequence length: 100
+  - Num channels: 2
+  - Total samples: 5000
+  - Marker strategy: extremes
+  - Baseline MSE: 0.1681
+  - Shape for model: torch.Size([5000, 2, 100])
+  - Training set: 4000
+  - Validation set: 500
+  - Test set: 500
+Data loaded!
+  Input: (2 channels, 100 timesteps)
+  Output dim: 1
+
+Creating model...
+Creating model: QuantumMambaSSM (ID: 1b)
+  Group 1: quantum features → classical mixing (mamba)
+Model parameters: 421,730
+Verifying device placement...
+  WARNING: feature_proj.0.weight is on cuda:0, moving to cuda
+  WARNING: feature_proj.0.bias is on cuda:0, moving to cuda
+  WARNING: feature_proj.1.weight is on cuda:0, moving to cuda
+  WARNING: feature_proj.1.bias is on cuda:0, moving to cuda
+  WARNING: quantum_processor.chunk_attention.0.weight is on cuda:0, moving to cuda
+  WARNING: quantum_processor.chunk_attention.0.bias is on cuda:0, moving to cuda
+  WARNING: quantum_processor.chunk_attention.2.weight is on cuda:0, moving to cuda
+  WARNING: quantum_processor.chunk_attention.2.bias is on cuda:0, moving to cuda
+  WARNING: quantum_processor.quantum_branches.alpha_real is on cuda:0, moving to cuda
+  WARNING: quantum_processor.quantum_branches.alpha_imag is on cuda:0, moving to cuda
+  WARNING: quantum_processor.quantum_branches.beta_real is on cuda:0, moving to cuda
+  WARNING: quantum_processor.quantum_branches.beta_imag is on cuda:0, moving to cuda
+  WARNING: quantum_processor.quantum_branches.gamma_real is on cuda:0, moving to cuda
+  WARNING: quantum_processor.quantum_branches.gamma_imag is on cuda:0, moving to cuda
+  WARNING: quantum_processor.quantum_branches.proj1.weight is on cuda:0, moving to cuda
+  WARNING: quantum_processor.quantum_branches.proj1.bias is on cuda:0, moving to cuda
+  WARNING: quantum_processor.quantum_branches.proj2.weight is on cuda:0, moving to cuda
+  WARNING: quantum_processor.quantum_branches.proj2.bias is on cuda:0, moving to cuda
+  WARNING: quantum_processor.quantum_branches.proj3.weight is on cuda:0, moving to cuda
+  WARNING: quantum_processor.quantum_branches.proj3.bias is on cuda:0, moving to cuda
+  WARNING: quantum_processor.quantum_branches.input_proj.weight is on cuda:0, moving to cuda
+  WARNING: quantum_processor.quantum_branches.input_proj.bias is on cuda:0, moving to cuda
+  WARNING: quantum_processor.output_proj.0.weight is on cuda:0, moving to cuda
+  WARNING: quantum_processor.output_proj.0.bias is on cuda:0, moving to cuda
+  WARNING: quantum_processor.output_proj.1.weight is on cuda:0, moving to cuda
+  WARNING: quantum_processor.output_proj.1.bias is on cuda:0, moving to cuda
+  WARNING: mamba_layers.0.in_proj.weight is on cuda:0, moving to cuda
+  WARNING: mamba_layers.0.conv1d.weight is on cuda:0, moving to cuda
+  WARNING: mamba_layers.0.conv1d.bias is on cuda:0, moving to cuda
+  WARNING: mamba_layers.0.ssm.A_log is on cuda:0, moving to cuda
+  WARNING: mamba_layers.0.ssm.D is on cuda:0, moving to cuda
+  WARNING: mamba_layers.0.ssm.x_proj.weight is on cuda:0, moving to cuda
+  WARNING: mamba_layers.0.ssm.dt_proj.weight is on cuda:0, moving to cuda
+  WARNING: mamba_layers.0.ssm.dt_proj.bias is on cuda:0, moving to cuda
+  WARNING: mamba_layers.0.ssm.out_proj.weight is on cuda:0, moving to cuda
+  WARNING: mamba_layers.0.out_proj.weight is on cuda:0, moving to cuda
+  WARNING: mamba_layers.0.norm.weight is on cuda:0, moving to cuda
+  WARNING: mamba_layers.0.norm.bias is on cuda:0, moving to cuda
+  WARNING: mamba_layers.1.in_proj.weight is on cuda:0, moving to cuda
+  WARNING: mamba_layers.1.conv1d.weight is on cuda:0, moving to cuda
+  WARNING: mamba_layers.1.conv1d.bias is on cuda:0, moving to cuda
+  WARNING: mamba_layers.1.ssm.A_log is on cuda:0, moving to cuda
+  WARNING: mamba_layers.1.ssm.D is on cuda:0, moving to cuda
+  WARNING: mamba_layers.1.ssm.x_proj.weight is on cuda:0, moving to cuda
+  WARNING: mamba_layers.1.ssm.dt_proj.weight is on cuda:0, moving to cuda
+  WARNING: mamba_layers.1.ssm.dt_proj.bias is on cuda:0, moving to cuda
+  WARNING: mamba_layers.1.ssm.out_proj.weight is on cuda:0, moving to cuda
+  WARNING: mamba_layers.1.out_proj.weight is on cuda:0, moving to cuda
+  WARNING: mamba_layers.1.norm.weight is on cuda:0, moving to cuda
+  WARNING: mamba_layers.1.norm.bias is on cuda:0, moving to cuda
+  WARNING: output_norm.weight is on cuda:0, moving to cuda
+  WARNING: output_norm.bias is on cuda:0, moving to cuda
+  WARNING: output_layer.0.weight is on cuda:0, moving to cuda
+  WARNING: output_layer.0.bias is on cuda:0, moving to cuda
+  WARNING: output_layer.3.weight is on cuda:0, moving to cuda
+  WARNING: output_layer.3.bias is on cuda:0, moving to cuda
+Model moved to cuda
+
+================================================================================
+Training Started (epochs 1 to 100)
+================================================================================
+
+Epoch   1/100 (37.9s) * | Train MSE: 0.169490 | Val MSE: 0.005402
+Epoch   2/100 (37.4s) * | Train MSE: 0.008733 | Val MSE: 0.001723
+Epoch   4/100 (37.4s) * | Train MSE: 0.005067 | Val MSE: 0.000679
+Epoch   5/100 (37.4s) | Train MSE: 0.004661 | Val MSE: 0.001053
+Epoch   6/100 (37.6s) * | Train MSE: 0.004815 | Val MSE: 0.000593
+Epoch   7/100 (37.4s) * | Train MSE: 0.004359 | Val MSE: 0.000566
+Epoch   8/100 (37.4s) * | Train MSE: 0.003629 | Val MSE: 0.000321
+Epoch  10/100 (37.3s) | Train MSE: 0.003762 | Val MSE: 0.005178
+Epoch  11/100 (37.3s) * | Train MSE: 0.003599 | Val MSE: 0.000244
+Epoch  15/100 (37.4s) | Train MSE: 0.003544 | Val MSE: 0.000427
+Epoch  20/100 (36.1s) | Train MSE: 0.002924 | Val MSE: 0.001157
+Epoch  25/100 (35.8s) | Train MSE: 0.002480 | Val MSE: 0.000373
+Epoch  26/100 (35.9s) * | Train MSE: 0.002331 | Val MSE: 0.000179
+Epoch  30/100 (35.9s) | Train MSE: 0.002299 | Val MSE: 0.000579
+Epoch  34/100 (36.2s) * | Train MSE: 0.001989 | Val MSE: 0.000075
+Epoch  35/100 (35.8s) | Train MSE: 0.002011 | Val MSE: 0.000648
+Epoch  40/100 (35.6s) | Train MSE: 0.002063 | Val MSE: 0.000797
+Epoch  45/100 (35.3s) | Train MSE: 0.001642 | Val MSE: 0.000457
+Epoch  50/100 (35.2s) | Train MSE: 0.001521 | Val MSE: 0.000244
+
+Early stopping at epoch 54 (no improvement for 20 epochs)
+
+================================================================================
+Training Complete!
+================================================================================
+Total Time: 1953.12s (32.55 min)
+Best Val MSE: 0.000075
+Test Results:
+  MSE: 0.000075
+  MAE: 0.006728
+  R²: 0.9996
+  Baseline MSE: 0.1670
+  Improvement over baseline: 100.0%
+Job completed: syn_1b_adding_problem_L100_s2025
+End time: Sun 04 Jan 2026 04:21:20 AM PST

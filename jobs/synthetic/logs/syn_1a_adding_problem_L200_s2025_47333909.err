@@ -1,0 +1,21 @@
+Generating samples:   0%|                                                                                                                                                                                                  | 0/5000 [00:00<?, ?it/s]Generating samples:  32%|█████████████████████████████████████████████████████████▍                                                                                                                          | 1594/5000 [00:00<00:00, 15938.34it/s]Generating samples:  80%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▊                                   | 4023/5000 [00:00<00:00, 20848.34it/s]Generating samples: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5000/5000 [00:00<00:00, 20985.24it/s]
+/pscratch/sd/j/junghoon/quantum_hydra_mamba/data_loaders/adding_problem_dataloader.py:70: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  data = torch.load(dataset_path)
+Traceback (most recent call last):
+  File "/pscratch/sd/j/junghoon/quantum_hydra_mamba/scripts/run_synthetic_benchmark.py", line 1022, in <module>
+    results = train_model(
+              ^^^^^^^^^^^^
+  File "/pscratch/sd/j/junghoon/quantum_hydra_mamba/scripts/run_synthetic_benchmark.py", line 919, in train_model
+    json.dump(results, f, indent=2)
+  File "/pscratch/sd/j/junghoon/conda-envs/qml_eeg/lib/python3.11/json/__init__.py", line 179, in dump
+    for chunk in iterable:
+  File "/pscratch/sd/j/junghoon/conda-envs/qml_eeg/lib/python3.11/json/encoder.py", line 432, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/pscratch/sd/j/junghoon/conda-envs/qml_eeg/lib/python3.11/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/pscratch/sd/j/junghoon/conda-envs/qml_eeg/lib/python3.11/json/encoder.py", line 439, in _iterencode
+    o = _default(o)
+        ^^^^^^^^^^^
+  File "/pscratch/sd/j/junghoon/conda-envs/qml_eeg/lib/python3.11/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type float32 is not JSON serializable

@@ -1,0 +1,58 @@
+#!/bin/bash
+#SBATCH --job-name=abl_2a_160Hz_s2025
+#SBATCH --account=m4727_g
+#SBATCH --constraint=gpu&hbm80g
+#SBATCH --qos=shared
+#SBATCH -t 24:00:00
+#SBATCH --nodes=1
+#SBATCH --gpus=1
+#SBATCH --cpus-per-task=32
+#SBATCH --output=./results/ablation_eeg/logs/abl_2a_160Hz_s2025.log
+#SBATCH --error=./results/ablation_eeg/logs/abl_2a_160Hz_s2025.log
+
+# ============================================
+# Ablation Study Job [83/108]
+# ============================================
+# Model: 2a (ClassicalQuantumAttention)
+# Sampling Freq: 160 Hz
+# Seed: 2025
+# ============================================
+
+echo "============================================"
+echo "Ablation Study - EEG Classification"
+echo "============================================"
+echo "Job: abl_2a_160Hz_s2025"
+echo "Model: 2a (ClassicalQuantumAttention)"
+echo "Sampling Freq: 160 Hz"
+echo "Seed: 2025"
+echo "Started: $(date)"
+echo "============================================"
+
+# Activate conda environment
+source activate ./conda-envs/qml_env
+
+# Navigate to project root
+cd /pscratch/sd/j/junghoon/quantum_hydra_mamba
+
+# Run training (with --resume to automatically continue from checkpoint if available)
+python scripts/run_ablation_eeg.py \
+    --model-id 2a \
+    --n-qubits 6 \
+    --n-layers 2 \
+    --d-model 128 \
+    --d-state 16 \
+    --n-epochs 50 \
+    --batch-size 32 \
+    --lr 0.001 \
+    --weight-decay 0.0001 \
+    --early-stopping 10 \
+    --sample-size 109 \
+    --sampling-freq 160 \
+    --seed 2025 \
+    --output-dir ./results/ablation_eeg \
+    --device cuda \
+    --resume
+
+echo "============================================"
+echo "Completed: $(date)"
+echo "============================================"

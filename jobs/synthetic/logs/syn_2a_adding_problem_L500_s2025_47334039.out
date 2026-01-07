@@ -1,0 +1,121 @@
+Starting job: syn_2a_adding_problem_L500_s2025
+Date: Tue 06 Jan 2026 06:55:00 AM PST
+Host: nid008288
+GPU: NVIDIA A100-SXM4-80GB
+Using GPU: NVIDIA A100-SXM4-80GB
+================================================================================
+SYNTHETIC BENCHMARK - ADDING_PROBLEM
+================================================================================
+Model ID: 2a (ClassicalQuantumAttention)
+  Group 2: classical feat → quantum mix (transformer)
+Task: adding_problem (regression)
+Sequence Length: 500
+Seed: 2025
+Device: cuda
+--------------------------------------------------------------------------------
+Hyperparameters:
+  n_qubits=6, n_layers=2
+  d_model=128, d_state=16
+  epochs=100, batch_size=32
+  lr=0.001, weight_decay=0.0001
+  early_stopping=20
+================================================================================
+
+Loading Data...
+Loading Adding Problem dataset from data/synthetic_benchmarks/adding_problem/adding_L500_seed2025.pt...
+Dataset loaded successfully.
+  - Task: adding_problem
+  - Sequence length: 500
+  - Num channels: 2
+  - Total samples: 5000
+  - Marker strategy: extremes
+  - Baseline MSE: 0.1672
+  - Shape for model: torch.Size([5000, 2, 500])
+  - Training set: 4000
+  - Validation set: 500
+  - Test set: 500
+Data loaded!
+  Input: (2 channels, 500 timesteps)
+  Output dim: 1
+
+Creating model...
+Creating model: ClassicalQuantumAttention (ID: 2a)
+  Group 2: classical features → quantum mixing (transformer)
+Model parameters: 35,836
+Verifying device placement...
+  WARNING: feature_extractor.embedding.weight is on cuda:0, moving to cuda
+  WARNING: feature_extractor.embedding.bias is on cuda:0, moving to cuda
+  WARNING: chunk_attention.0.weight is on cuda:0, moving to cuda
+  WARNING: chunk_attention.0.bias is on cuda:0, moving to cuda
+  WARNING: chunk_attention.2.weight is on cuda:0, moving to cuda
+  WARNING: chunk_attention.2.bias is on cuda:0, moving to cuda
+  WARNING: quantum_attention.mix_coeffs is on cuda:0, moving to cuda
+  WARNING: quantum_attention.qff_params is on cuda:0, moving to cuda
+  WARNING: quantum_attention.param_proj.weight is on cuda:0, moving to cuda
+  WARNING: quantum_attention.param_proj.bias is on cuda:0, moving to cuda
+  WARNING: quantum_attention.output_proj.weight is on cuda:0, moving to cuda
+  WARNING: quantum_attention.output_proj.bias is on cuda:0, moving to cuda
+  WARNING: output_norm.weight is on cuda:0, moving to cuda
+  WARNING: output_norm.bias is on cuda:0, moving to cuda
+  WARNING: classifier.0.weight is on cuda:0, moving to cuda
+  WARNING: classifier.0.bias is on cuda:0, moving to cuda
+  WARNING: classifier.3.weight is on cuda:0, moving to cuda
+  WARNING: classifier.3.bias is on cuda:0, moving to cuda
+Model moved to cuda
+
+================================================================================
+Training Started (epochs 1 to 100)
+================================================================================
+
+Epoch   1/100 (222.2s) * | Train MSE: 0.200751 | Val MSE: 0.169638
+Epoch   2/100 (221.2s) * | Train MSE: 0.173928 | Val MSE: 0.169420
+Epoch   3/100 (221.3s) * | Train MSE: 0.148476 | Val MSE: 0.054564
+Epoch   4/100 (221.0s) * | Train MSE: 0.047107 | Val MSE: 0.024212
+Epoch   5/100 (220.7s) * | Train MSE: 0.022272 | Val MSE: 0.006213
+Epoch   7/100 (218.5s) * | Train MSE: 0.013780 | Val MSE: 0.005803
+Epoch   8/100 (216.6s) * | Train MSE: 0.012188 | Val MSE: 0.001643
+Epoch  10/100 (216.6s) * | Train MSE: 0.008458 | Val MSE: 0.001250
+Epoch  12/100 (216.8s) * | Train MSE: 0.008224 | Val MSE: 0.001209
+Epoch  15/100 (216.8s) * | Train MSE: 0.007612 | Val MSE: 0.001107
+Epoch  17/100 (216.8s) * | Train MSE: 0.006831 | Val MSE: 0.000701
+Epoch  20/100 (218.0s) | Train MSE: 0.006056 | Val MSE: 0.000706
+Epoch  25/100 (216.7s) * | Train MSE: 0.005138 | Val MSE: 0.000498
+Epoch  30/100 (213.6s) | Train MSE: 0.004532 | Val MSE: 0.001204
+Epoch  35/100 (212.0s) | Train MSE: 0.004188 | Val MSE: 0.000914
+Epoch  36/100 (211.9s) * | Train MSE: 0.004307 | Val MSE: 0.000443
+Epoch  40/100 (216.6s) | Train MSE: 0.003627 | Val MSE: 0.000506
+Epoch  43/100 (216.6s) * | Train MSE: 0.003557 | Val MSE: 0.000407
+Epoch  45/100 (214.3s) | Train MSE: 0.003461 | Val MSE: 0.000483
+Epoch  46/100 (210.6s) * | Train MSE: 0.003159 | Val MSE: 0.000339
+Epoch  49/100 (210.7s) * | Train MSE: 0.002930 | Val MSE: 0.000335
+Epoch  50/100 (210.7s) * | Train MSE: 0.003054 | Val MSE: 0.000311
+Epoch  52/100 (213.0s) * | Train MSE: 0.003246 | Val MSE: 0.000175
+Epoch  55/100 (212.5s) | Train MSE: 0.002725 | Val MSE: 0.000397
+Epoch  60/100 (211.7s) | Train MSE: 0.002598 | Val MSE: 0.000405
+Epoch  65/100 (211.1s) | Train MSE: 0.002570 | Val MSE: 0.000646
+Epoch  70/100 (213.2s) | Train MSE: 0.002332 | Val MSE: 0.000354
+Epoch  71/100 (211.8s) * | Train MSE: 0.002319 | Val MSE: 0.000175
+Epoch  73/100 (212.2s) * | Train MSE: 0.002334 | Val MSE: 0.000126
+Epoch  74/100 (211.7s) * | Train MSE: 0.002314 | Val MSE: 0.000113
+Epoch  75/100 (211.7s) | Train MSE: 0.002069 | Val MSE: 0.000356
+Epoch  79/100 (212.1s) * | Train MSE: 0.002321 | Val MSE: 0.000101
+Epoch  80/100 (212.6s) | Train MSE: 0.002205 | Val MSE: 0.000190
+Epoch  85/100 (211.7s) | Train MSE: 0.002270 | Val MSE: 0.000136
+Epoch  90/100 (211.9s) | Train MSE: 0.002263 | Val MSE: 0.000152
+Epoch  91/100 (211.9s) * | Train MSE: 0.002194 | Val MSE: 0.000097
+Epoch  95/100 (213.2s) | Train MSE: 0.002087 | Val MSE: 0.000120
+Epoch 100/100 (212.2s) | Train MSE: 0.002126 | Val MSE: 0.000121
+
+================================================================================
+Training Complete!
+================================================================================
+Total Time: 21403.01s (356.72 min)
+Best Val MSE: 0.000097
+Test Results:
+  MSE: 0.000098
+  MAE: 0.007293
+  R²: 0.9994
+  Baseline MSE: 0.1670
+  Improvement over baseline: 99.9%
+Job completed: syn_2a_adding_problem_L500_s2025
+End time: Tue 06 Jan 2026 12:52:12 PM PST

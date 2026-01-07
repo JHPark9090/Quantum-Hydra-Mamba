@@ -1,0 +1,101 @@
+Starting job: syn_2a_forrelation_L200_s2025
+Date: Tue 06 Jan 2026 03:55:02 PM PST
+Host: nid008697
+GPU: NVIDIA A100-SXM4-80GB
+Using GPU: NVIDIA A100-SXM4-80GB
+================================================================================
+SYNTHETIC BENCHMARK - FORRELATION
+================================================================================
+Model ID: 2a (ClassicalQuantumAttention)
+  Group 2: classical feat → quantum mix (transformer)
+Task: forrelation (classification)
+Sequence Length: 200
+Seed: 2025
+Device: cuda
+--------------------------------------------------------------------------------
+Hyperparameters:
+  n_qubits=6, n_layers=2
+  d_model=128, d_state=16
+  epochs=100, batch_size=32
+  lr=0.001, weight_decay=0.0001
+  early_stopping=20
+================================================================================
+
+Loading Data...
+Loading dataset from data/synthetic_benchmarks/forrelation/forrelation_L200_seed2025.pt...
+Dataset loaded successfully.
+  - n_bits: 6
+  - seq_len: 200
+  - num_channels: 14
+  - Total sequences: 5000
+  - Shape for model: torch.Size([5000, 14, 200])
+  - Training set size: 4000
+  - Test set size: 1000
+Data loaded!
+  Input: (14 channels, 200 timesteps)
+  Output dim: 2
+
+Creating model...
+Creating model: ClassicalQuantumAttention (ID: 2a)
+  Group 2: classical features → quantum mixing (transformer)
+Model parameters: 37,482
+Verifying device placement...
+  WARNING: feature_extractor.embedding.weight is on cuda:0, moving to cuda
+  WARNING: feature_extractor.embedding.bias is on cuda:0, moving to cuda
+  WARNING: chunk_attention.0.weight is on cuda:0, moving to cuda
+  WARNING: chunk_attention.0.bias is on cuda:0, moving to cuda
+  WARNING: chunk_attention.2.weight is on cuda:0, moving to cuda
+  WARNING: chunk_attention.2.bias is on cuda:0, moving to cuda
+  WARNING: quantum_attention.mix_coeffs is on cuda:0, moving to cuda
+  WARNING: quantum_attention.qff_params is on cuda:0, moving to cuda
+  WARNING: quantum_attention.param_proj.weight is on cuda:0, moving to cuda
+  WARNING: quantum_attention.param_proj.bias is on cuda:0, moving to cuda
+  WARNING: quantum_attention.output_proj.weight is on cuda:0, moving to cuda
+  WARNING: quantum_attention.output_proj.bias is on cuda:0, moving to cuda
+  WARNING: output_norm.weight is on cuda:0, moving to cuda
+  WARNING: output_norm.bias is on cuda:0, moving to cuda
+  WARNING: classifier.0.weight is on cuda:0, moving to cuda
+  WARNING: classifier.0.bias is on cuda:0, moving to cuda
+  WARNING: classifier.3.weight is on cuda:0, moving to cuda
+  WARNING: classifier.3.bias is on cuda:0, moving to cuda
+Model moved to cuda
+
+================================================================================
+Training Started (epochs 1 to 100)
+================================================================================
+
+Epoch   1/100 (219.7s) * | Train: 0.0717/0.9673 | Val: 0.0000/1.0000
+Epoch   5/100 (214.5s) | Train: 0.0000/1.0000 | Val: 0.0000/1.0000
+Epoch  10/100 (230.4s) | Train: 0.0000/1.0000 | Val: 0.0000/1.0000
+Epoch  15/100 (230.4s) | Train: 0.0000/1.0000 | Val: 0.0000/1.0000
+Epoch  20/100 (232.1s) | Train: 0.0000/1.0000 | Val: 0.0000/1.0000
+
+Early stopping at epoch 21 (no improvement for 20 epochs)
+
+================================================================================
+Training Complete!
+================================================================================
+Total Time: 4711.71s (78.53 min)
+Best Val Acc: 1.0000
+Test Results:
+  Accuracy: 1.0000
+  AUC: 1.0000
+  F1: 1.0000
+  Baseline: 0.5000
+
+Results saved to: results/synthetic_benchmarks/synthetic_2a_forrelation_L200_seed2025_results.json
+Model saved to: results/synthetic_benchmarks/synthetic_2a_forrelation_L200_seed2025_model.pt
+Cleaned up training checkpoint: results/synthetic_benchmarks/checkpoints/checkpoint_2a_forrelation_L200_seed2025.pt
+
+================================================================================
+SYNTHETIC BENCHMARK RUN COMPLETE
+================================================================================
+Model: 2a (ClassicalQuantumAttention)
+Task: forrelation
+Seq Length: 200
+Test Accuracy: 1.0000
+Test AUC: 1.0000
+================================================================================
+
+Job completed: syn_2a_forrelation_L200_s2025
+End time: Tue 06 Jan 2026 05:14:16 PM PST
