@@ -1,6 +1,6 @@
-Starting job: syn_2d_adding_problem_L1000_s2024
-Date: Wed 07 Jan 2026 06:27:55 AM PST
-Host: nid008288
+Starting job: syn_2d_adding_problem_L100_s2026
+Date: Wed 07 Jan 2026 10:31:53 AM PST
+Host: nid008697
 GPU: NVIDIA A100-SXM4-80GB
 Using GPU: NVIDIA A100-SXM4-80GB
 ================================================================================
@@ -9,8 +9,8 @@ SYNTHETIC BENCHMARK - ADDING_PROBLEM
 Model ID: 2d (QuantumMambaHydraSSM)
   Group 2: classical feat → quantum_superposition mix (mamba)
 Task: adding_problem (regression)
-Sequence Length: 1000
-Seed: 2024
+Sequence Length: 100
+Seed: 2026
 Device: cuda
 --------------------------------------------------------------------------------
 Hyperparameters:
@@ -22,20 +22,20 @@ Hyperparameters:
 ================================================================================
 
 Loading Data...
-Loading Adding Problem dataset from data/synthetic_benchmarks/adding_problem/adding_L1000_seed2024.pt...
+Loading Adding Problem dataset from data/synthetic_benchmarks/adding_problem/adding_L100_seed2026.pt...
 Dataset loaded successfully.
   - Task: adding_problem
-  - Sequence length: 1000
+  - Sequence length: 100
   - Num channels: 2
   - Total samples: 5000
   - Marker strategy: extremes
-  - Baseline MSE: 0.1696
-  - Shape for model: torch.Size([5000, 2, 1000])
+  - Baseline MSE: 0.1660
+  - Shape for model: torch.Size([5000, 2, 100])
   - Training set: 4000
   - Validation set: 500
   - Test set: 500
 Data loaded!
-  Input: (2 channels, 1000 timesteps)
+  Input: (2 channels, 100 timesteps)
   Output dim: 1
 
 Creating model...
@@ -87,6 +87,48 @@ Model moved to cuda
 Training Started (epochs 1 to 100)
 ================================================================================
 
-Epoch   1/100 (2896.2s) * | Train MSE: 0.193468 | Val MSE: 0.171467
-Epoch   2/100 (2810.7s) * | Train MSE: 0.064812 | Val MSE: 0.004449
-Epoch   3/100 (2745.2s) * | Train MSE: 0.008669 | Val MSE: 0.001454
+Epoch   1/100 (374.5s) * | Train MSE: 0.141212 | Val MSE: 0.002172
+Epoch   2/100 (372.7s) * | Train MSE: 0.009296 | Val MSE: 0.001646
+Epoch   3/100 (375.6s) * | Train MSE: 0.006794 | Val MSE: 0.000628
+Epoch   4/100 (375.9s) * | Train MSE: 0.005899 | Val MSE: 0.000527
+Epoch   5/100 (375.2s) | Train MSE: 0.005031 | Val MSE: 0.002609
+Epoch   8/100 (372.4s) * | Train MSE: 0.003816 | Val MSE: 0.000474
+Epoch  10/100 (370.5s) | Train MSE: 0.003545 | Val MSE: 0.001823
+Epoch  13/100 (370.0s) * | Train MSE: 0.003387 | Val MSE: 0.000232
+Epoch  15/100 (370.3s) * | Train MSE: 0.003461 | Val MSE: 0.000050
+Epoch  20/100 (370.4s) * | Train MSE: 0.002862 | Val MSE: 0.000037
+Epoch  25/100 (367.7s) | Train MSE: 0.002718 | Val MSE: 0.000285
+Epoch  30/100 (367.2s) | Train MSE: 0.002199 | Val MSE: 0.000305
+Epoch  35/100 (362.5s) | Train MSE: 0.002166 | Val MSE: 0.000064
+Epoch  40/100 (362.4s) | Train MSE: 0.001894 | Val MSE: 0.000148
+
+Early stopping at epoch 40 (no improvement for 20 epochs)
+
+================================================================================
+Training Complete!
+================================================================================
+Total Time: 14757.80s (245.96 min)
+Best Val MSE: 0.000037
+Test Results:
+  MSE: 0.000041
+  MAE: 0.004890
+  R²: 0.9998
+  Baseline MSE: 0.1670
+  Improvement over baseline: 100.0%
+
+Results saved to: results/synthetic_benchmarks/synthetic_2d_adding_problem_L100_seed2026_results.json
+Model saved to: results/synthetic_benchmarks/synthetic_2d_adding_problem_L100_seed2026_model.pt
+Cleaned up training checkpoint: results/synthetic_benchmarks/checkpoints/checkpoint_2d_adding_problem_L100_seed2026.pt
+
+================================================================================
+SYNTHETIC BENCHMARK RUN COMPLETE
+================================================================================
+Model: 2d (QuantumMambaHydraSSM)
+Task: adding_problem
+Seq Length: 100
+Test MSE: 0.000041
+Test R²: 0.9998
+================================================================================
+
+Job completed: syn_2d_adding_problem_L100_s2026
+End time: Wed 07 Jan 2026 02:38:31 PM PST

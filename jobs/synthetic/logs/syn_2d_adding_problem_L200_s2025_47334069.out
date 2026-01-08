@@ -1,6 +1,6 @@
-Starting job: syn_2d_adding_problem_L1000_s2025
-Date: Wed 07 Jan 2026 06:27:57 AM PST
-Host: nid008288
+Starting job: syn_2d_adding_problem_L200_s2025
+Date: Wed 07 Jan 2026 03:11:22 PM PST
+Host: nid008297
 GPU: NVIDIA A100-SXM4-80GB
 Using GPU: NVIDIA A100-SXM4-80GB
 ================================================================================
@@ -9,7 +9,7 @@ SYNTHETIC BENCHMARK - ADDING_PROBLEM
 Model ID: 2d (QuantumMambaHydraSSM)
   Group 2: classical feat → quantum_superposition mix (mamba)
 Task: adding_problem (regression)
-Sequence Length: 1000
+Sequence Length: 200
 Seed: 2025
 Device: cuda
 --------------------------------------------------------------------------------
@@ -22,20 +22,20 @@ Hyperparameters:
 ================================================================================
 
 Loading Data...
-Loading Adding Problem dataset from data/synthetic_benchmarks/adding_problem/adding_L1000_seed2025.pt...
+Loading Adding Problem dataset from data/synthetic_benchmarks/adding_problem/adding_L200_seed2025.pt...
 Dataset loaded successfully.
   - Task: adding_problem
-  - Sequence length: 1000
+  - Sequence length: 200
   - Num channels: 2
   - Total samples: 5000
   - Marker strategy: extremes
-  - Baseline MSE: 0.1645
-  - Shape for model: torch.Size([5000, 2, 1000])
+  - Baseline MSE: 0.1696
+  - Shape for model: torch.Size([5000, 2, 200])
   - Training set: 4000
   - Validation set: 500
   - Test set: 500
 Data loaded!
-  Input: (2 channels, 1000 timesteps)
+  Input: (2 channels, 200 timesteps)
   Output dim: 1
 
 Creating model...
@@ -87,6 +87,20 @@ Model moved to cuda
 Training Started (epochs 1 to 100)
 ================================================================================
 
-Epoch   1/100 (2841.6s) * | Train MSE: 0.179467 | Val MSE: 0.175435
-Epoch   2/100 (2826.2s) * | Train MSE: 0.169975 | Val MSE: 0.172285
-Epoch   3/100 (2753.8s) * | Train MSE: 0.168146 | Val MSE: 0.171638
+Epoch   1/100 (705.0s) * | Train MSE: 0.159832 | Val MSE: 0.014529
+Epoch   2/100 (713.9s) * | Train MSE: 0.014940 | Val MSE: 0.001891
+Epoch   3/100 (731.5s) * | Train MSE: 0.008065 | Val MSE: 0.001748
+Epoch   4/100 (716.8s) * | Train MSE: 0.005989 | Val MSE: 0.000831
+Epoch   5/100 (702.6s) * | Train MSE: 0.005321 | Val MSE: 0.000398
+Epoch   6/100 (697.5s) * | Train MSE: 0.004780 | Val MSE: 0.000319
+Epoch   7/100 (690.5s) * | Train MSE: 0.004131 | Val MSE: 0.000227
+Epoch   9/100 (693.4s) * | Train MSE: 0.003712 | Val MSE: 0.000210
+Epoch  10/100 (701.2s) * | Train MSE: 0.003543 | Val MSE: 0.000199
+Epoch  15/100 (697.9s) | Train MSE: 0.002827 | Val MSE: 0.000298
+Epoch  20/100 (677.4s) * | Train MSE: 0.002679 | Val MSE: 0.000171
+Epoch  21/100 (672.4s) * | Train MSE: 0.002527 | Val MSE: 0.000139
+Epoch  25/100 (688.3s) | Train MSE: 0.002355 | Val MSE: 0.000185
+Epoch  26/100 (688.6s) * | Train MSE: 0.002195 | Val MSE: 0.000106
+Epoch  30/100 (691.3s) | Train MSE: 0.002125 | Val MSE: 0.000216
+Epoch  35/100 (679.8s) * | Train MSE: 0.001856 | Val MSE: 0.000104
+Epoch  39/100 (694.7s) * | Train MSE: 0.001661 | Val MSE: 0.000069

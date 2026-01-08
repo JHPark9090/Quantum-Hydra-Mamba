@@ -1,6 +1,6 @@
-Starting job: syn_2d_adding_problem_L100_s2024
-Date: Wed 07 Jan 2026 07:01:03 AM PST
-Host: nid008288
+Starting job: syn_2d_adding_problem_L100_s2025
+Date: Wed 07 Jan 2026 07:52:49 AM PST
+Host: nid008193
 GPU: NVIDIA A100-SXM4-80GB
 Using GPU: NVIDIA A100-SXM4-80GB
 ================================================================================
@@ -10,7 +10,7 @@ Model ID: 2d (QuantumMambaHydraSSM)
   Group 2: classical feat → quantum_superposition mix (mamba)
 Task: adding_problem (regression)
 Sequence Length: 100
-Seed: 2024
+Seed: 2025
 Device: cuda
 --------------------------------------------------------------------------------
 Hyperparameters:
@@ -22,14 +22,14 @@ Hyperparameters:
 ================================================================================
 
 Loading Data...
-Loading Adding Problem dataset from data/synthetic_benchmarks/adding_problem/adding_L100_seed2024.pt...
+Loading Adding Problem dataset from data/synthetic_benchmarks/adding_problem/adding_L100_seed2025.pt...
 Dataset loaded successfully.
   - Task: adding_problem
   - Sequence length: 100
   - Num channels: 2
   - Total samples: 5000
   - Marker strategy: extremes
-  - Baseline MSE: 0.1640
+  - Baseline MSE: 0.1681
   - Shape for model: torch.Size([5000, 2, 100])
   - Training set: 4000
   - Validation set: 500
@@ -87,11 +87,52 @@ Model moved to cuda
 Training Started (epochs 1 to 100)
 ================================================================================
 
-Epoch   1/100 (378.1s) * | Train MSE: 0.134472 | Val MSE: 0.005084
-Epoch   2/100 (375.7s) * | Train MSE: 0.009270 | Val MSE: 0.000518
-Epoch   5/100 (375.7s) * | Train MSE: 0.004930 | Val MSE: 0.000433
-Epoch   8/100 (369.5s) * | Train MSE: 0.003701 | Val MSE: 0.000110
-Epoch  10/100 (371.0s) | Train MSE: 0.003613 | Val MSE: 0.000432
-Epoch  14/100 (360.9s) * | Train MSE: 0.002882 | Val MSE: 0.000061
-Epoch  15/100 (362.6s) | Train MSE: 0.002811 | Val MSE: 0.000179
-Epoch  20/100 (359.4s) | Train MSE: 0.002690 | Val MSE: 0.000185
+Epoch   1/100 (411.4s) * | Train MSE: 0.122016 | Val MSE: 0.001491
+Epoch   4/100 (412.7s) * | Train MSE: 0.006076 | Val MSE: 0.000225
+Epoch   5/100 (412.1s) | Train MSE: 0.005120 | Val MSE: 0.001866
+Epoch   8/100 (407.4s) * | Train MSE: 0.003725 | Val MSE: 0.000207
+Epoch  10/100 (404.1s) * | Train MSE: 0.003364 | Val MSE: 0.000184
+Epoch  15/100 (390.7s) | Train MSE: 0.003330 | Val MSE: 0.000273
+Epoch  17/100 (385.0s) * | Train MSE: 0.002627 | Val MSE: 0.000072
+Epoch  20/100 (372.2s) | Train MSE: 0.002715 | Val MSE: 0.000159
+Epoch  25/100 (369.8s) | Train MSE: 0.002510 | Val MSE: 0.001097
+Epoch  30/100 (397.4s) | Train MSE: 0.002326 | Val MSE: 0.000718
+Epoch  34/100 (364.1s) * | Train MSE: 0.002287 | Val MSE: 0.000050
+Epoch  35/100 (364.8s) | Train MSE: 0.002092 | Val MSE: 0.000380
+Epoch  40/100 (414.1s) | Train MSE: 0.001772 | Val MSE: 0.000319
+Epoch  43/100 (391.9s) * | Train MSE: 0.001718 | Val MSE: 0.000033
+Epoch  45/100 (396.0s) | Train MSE: 0.001690 | Val MSE: 0.000072
+Epoch  50/100 (386.7s) | Train MSE: 0.001469 | Val MSE: 0.000088
+Epoch  55/100 (391.7s) | Train MSE: 0.001465 | Val MSE: 0.000132
+Epoch  60/100 (368.5s) | Train MSE: 0.001336 | Val MSE: 0.000087
+
+Early stopping at epoch 63 (no improvement for 20 epochs)
+
+================================================================================
+Training Complete!
+================================================================================
+Total Time: 24620.94s (410.35 min)
+Best Val MSE: 0.000033
+Test Results:
+  MSE: 0.000036
+  MAE: 0.004233
+  R²: 0.9998
+  Baseline MSE: 0.1670
+  Improvement over baseline: 100.0%
+
+Results saved to: results/synthetic_benchmarks/synthetic_2d_adding_problem_L100_seed2025_results.json
+Model saved to: results/synthetic_benchmarks/synthetic_2d_adding_problem_L100_seed2025_model.pt
+Cleaned up training checkpoint: results/synthetic_benchmarks/checkpoints/checkpoint_2d_adding_problem_L100_seed2025.pt
+
+================================================================================
+SYNTHETIC BENCHMARK RUN COMPLETE
+================================================================================
+Model: 2d (QuantumMambaHydraSSM)
+Task: adding_problem
+Seq Length: 100
+Test MSE: 0.000036
+Test R²: 0.9998
+================================================================================
+
+Job completed: syn_2d_adding_problem_L100_s2025
+End time: Wed 07 Jan 2026 02:43:47 PM PST

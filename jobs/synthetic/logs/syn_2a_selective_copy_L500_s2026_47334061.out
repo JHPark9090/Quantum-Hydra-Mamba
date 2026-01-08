@@ -124,3 +124,33 @@ Epoch  91/100 (222.5s) * | Train MSE: 0.069723 | Val MSE: 0.068699
 Epoch  92/100 (223.3s) * | Train MSE: 0.069760 | Val MSE: 0.068693
 Epoch  95/100 (221.5s) * | Train MSE: 0.069678 | Val MSE: 0.068687
 Epoch  97/100 (221.9s) * | Train MSE: 0.069597 | Val MSE: 0.068679
+Epoch 100/100 (222.4s) | Train MSE: 0.069590 | Val MSE: 0.068682
+
+================================================================================
+Training Complete!
+================================================================================
+Total Time: 21589.86s (359.83 min)
+Best Val MSE: 0.068679
+Test Results:
+  MSE: 0.069496
+  MAE: 0.221992
+  R²: 0.1625
+  Baseline MSE: 0.0830
+  Improvement over baseline: 16.3%
+
+Results saved to: results/synthetic_benchmarks/synthetic_2a_selective_copy_L500_seed2026_results.json
+Model saved to: results/synthetic_benchmarks/synthetic_2a_selective_copy_L500_seed2026_model.pt
+Cleaned up training checkpoint: results/synthetic_benchmarks/checkpoints/checkpoint_2a_selective_copy_L500_seed2026.pt
+
+================================================================================
+SYNTHETIC BENCHMARK RUN COMPLETE
+================================================================================
+Model: 2a (ClassicalQuantumAttention)
+Task: selective_copy
+Seq Length: 500
+Test MSE: 0.069496
+Test R²: 0.1625
+================================================================================
+
+Job completed: syn_2a_selective_copy_L500_s2026
+End time: Wed 07 Jan 2026 09:10:33 AM PST
